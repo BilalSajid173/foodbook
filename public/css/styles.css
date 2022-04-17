@@ -13,8 +13,12 @@ body {
 .nav-container {
   font-family: "Merriweather Sans", sans-serif;
   font-weight: 600;
-  padding: 2% 12%;
+  padding: 2% 12% 1.5%;
   background-color: #fd5d5d;
+}
+
+.navbar {
+  padding: 0;
 }
 
 .navbar-collapse {
@@ -42,19 +46,6 @@ body {
   background-color: #ff8080;
 }
 
-/*Search Bar*/
-
-.search-bar-div {
-  padding: 1%;
-  margin-top: -1px; /*pull up this div to remove the faint white line*/
-}
-
-.search-bar {
-  width: 50%;
-  margin: 0 auto;
-  transition: all 0.3s ease-in-out;
-}
-
 .form-control,
 .nav-container button {
   /*to prevent the default blue outline by bootstrap on clicking buttons*/
@@ -70,11 +61,54 @@ body {
   margin-left: 10px;
 }
 
+/*****************************************Heading*********************************/
+
+.heading-section {
+  height: 500px;
+  padding: 7% 12%;
+  background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("/images/top-div-bg-img.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  font-family: 'Varela Round', sans-serif;
+}
+
+.top-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-div a{
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+.top-div a:hover{
+  color: white;
+}
+
+.top-div button{
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid black !important;
+  margin-top: 4%;
+}
+
+/************************************************************************************/
+
+.h {
+  height: 500px;
+  width: 100%;
+  background-color: #fd5d5d;
+}
 
 /******************************************Media Queries**********************************/
 
 @media only screen and (max-width: 990px) {
-  .search-bar {
-    width: 100%;
+  .heading-section {
+    height: 300px;
   }
 }
