@@ -1,0 +1,80 @@
+/*font-family: 'Merriweather Sans', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+font-family: 'Varela Round', sans-serif;*/
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/****************************************Navigation****************************************/
+
+.nav-container {
+  font-family: "Merriweather Sans", sans-serif;
+  font-weight: 600;
+  padding: 2% 12%;
+  background-color: #fd5d5d;
+}
+
+.navbar-collapse {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.navbar-brand {
+  font-size: 2.5rem;
+  color: white !important;
+}
+
+.nav-item a:hover {
+  color: #fdf6ec !important;
+}
+
+/*DropDown*/
+
+/* .dropdown-menu {
+  border: 0;
+  background-color: #fd5d5d;
+} */
+
+.dropdown-menu a:hover {
+  background-color: #ff8080;
+}
+
+/*Search Bar*/
+
+.search-bar-div {
+  padding: 1%;
+  margin-top: -1px; /*pull up this div to remove the faint white line*/
+}
+
+.search-bar {
+  width: 50%;
+  margin: 0 auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-control,
+.nav-container button {
+  /*to prevent the default blue outline by bootstrap on clicking buttons*/
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid rgb(221, 221, 221) !important;
+}
+
+.nav-container button {
+  padding: 0 !important;
+  border: 0 !important;
+  font-size: 1.5rem;
+  margin-left: 10px;
+}
+
+
+/******************************************Media Queries**********************************/
+
+@media only screen and (max-width: 990px) {
+  .search-bar {
+    width: 100%;
+  }
+}
