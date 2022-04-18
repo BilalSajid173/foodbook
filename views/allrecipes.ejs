@@ -1,0 +1,28 @@
+<%- include("partials/header.ejs") %>
+
+    <link rel="stylesheet" href="/css/all-recipes.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <%- include("partials/navbar.ejs") %>
+
+
+    <div class="top-rated container-fluid">
+        <h1><%=category%> Recipes</h1>
+        <div class="top-rated-recipes">
+            <% recipes.forEach(recipe=> {%>
+                <a href="/recipes/<%=recipe.name%>">
+                    <div class="recipe-card">
+                        <h2>
+                            <%=recipe.name%>
+                        </h2>
+                        <p>
+                            <%=recipe.desc%>
+                        </p>
+                    </div>
+                </a>
+                <%}) %>
+        </div>
+    </div>
+
+    <%- include("partials/footer.ejs") %> 

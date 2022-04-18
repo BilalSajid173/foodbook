@@ -1,0 +1,13 @@
+.individual-recipe {
+  background-color: #fd5d5d;
+  text-align: center;
+  padding: 5% 12%;
+  font-family: "Varela Round", sans-serif;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("/images/individual-recipe-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}

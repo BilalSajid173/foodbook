@@ -1,0 +1,119 @@
+.heading-section {
+  height: 500px;
+  padding: 7% 12%;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("/images/top-div-bg-img.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  font-family: "Varela Round", sans-serif;
+}
+
+.top-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-div a {
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+.top-div a:hover {
+  color: white;
+}
+
+.top-div button {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid black !important;
+  margin-top: 4%;
+}
+
+/****************Carousel**************/
+
+.myCarousel {
+  background-color: #fd5d5da1;
+  padding: 5% 12%;
+  text-align: center;
+  font-family: "Varela Round", sans-serif;
+  color: #310404;
+}
+
+.myCarousel img {
+  min-height: 250px;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 2px 2px 5px #eaece3, -2px -2px 5px #e2e5dd;
+}
+
+/***************Top Rated**************/
+
+.top-rated {
+  background-color: #fd5d5d;
+  text-align: center;
+  padding: 5% 12%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.top-rated h1 {
+  margin-bottom: 2rem;
+}
+
+.top-rated-recipes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.top-rated-recipes a {
+  text-decoration: none;
+  color: black;
+  width: 30%;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+}
+
+.recipe-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(227, 195, 195, 0.517);
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 2%;
+  transition: all 0.3s ease-in;
+}
+
+.recipe-card:hover {
+  box-shadow: 2px 2px 5px #6e7836, -2px 0 5px #657b41;
+}
+
+.recipe-card p {
+  text-align: justify;
+}
+
+.more-recipes {
+  text-decoration: none;
+  color: white;
+}
+
+.more-recipes:hover {
+  color: #657b41;
+}
+
+/******************Media Queries*******************/
+
+@media only screen and (max-width: 990px) {
+  .heading-section {
+    height: 300px;
+  }
+}

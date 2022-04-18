@@ -1,0 +1,96 @@
+.footer-section {
+  background-color: rgb(120, 116, 178);
+  padding: 3% 12%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.footer-section a {
+  text-decoration: none;
+}
+
+.facebook {
+  font-size: 1.5rem;
+  background-color: rgb(111, 111, 129);
+  border-radius: 50%;
+  padding: 10px 23px;
+  margin: 10px;
+}
+.facebook a {
+  color: rgb(0, 0, 87);
+}
+
+.facebook:hover {
+  background-color: rgb(18, 18, 100);
+}
+
+.facebook:hover a {
+  color: white;
+}
+
+.twitter {
+  font-size: 1.5rem;
+  background-color: rgb(43, 28, 40);
+  border-radius: 50%;
+  padding: 10px 20px;
+  margin: 10px;
+}
+
+.twitter a {
+  color: blue;
+}
+
+.twitter:hover {
+  background-color: rgb(116, 116, 215);
+}
+
+.twitter:hover a {
+  color: white;
+}
+
+.github {
+  font-size: 1.5rem;
+  background-color: rgb(218, 97, 97);
+  border-radius: 50%;
+  padding: 10px 20px;
+  margin: 10px;
+}
+
+.github a {
+  color: rgb(69, 33, 33);
+}
+
+.github:hover {
+  background-color: brown;
+}
+
+.github:hover a {
+  color: white;
+}
+
+.linkedIn {
+  font-size: 1.5rem;
+  background-color: blueviolet;
+  border-radius: 50%;
+  padding: 10px 20px;
+  margin: 10px;
+}
+
+.linkedIn a {
+  color: white;
+}
+
+.linkedIn:hover {
+  background-color: white;
+}
+
+.linkedIn:hover a {
+  color: blue;
+}
+.copyright {
+  text-align: center;
+  background-color: rgb(120, 116, 178);
+  padding-bottom: 2rem;
+  margin-bottom: 0;
+}
