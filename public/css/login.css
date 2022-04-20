@@ -1,0 +1,83 @@
+.wrapper-login {
+  width: 100%;
+  /* min-height: 100vh; */
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("/images/login-page-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: "Varela Round", sans-serif;
+}
+
+.login-form {
+  width: 60%;
+  text-align: center;
+  padding: 7% 10%;
+  background-color: white;
+}
+
+.login-form button {
+  margin-top: 1rem;
+  outline: none !important;
+  box-shadow: none !important;
+  /* border: 1px solid black !important; */
+}
+
+.email,
+.password {
+  margin: 1rem 0;
+}
+
+.login-form i {
+  padding: 0.6rem;
+  margin-right: 0;
+  font-size: 1.5rem;
+}
+
+.login-form input {
+  outline: 0;
+  padding: 0.5rem;
+  border: 1.5px solid gray;
+  border-radius: 5px;
+  width: 60%;
+}
+
+.register-now {
+  margin-top: 2rem;
+}
+.register-now a {
+  text-decoration: none;
+  margin-left: 50%;
+}
+
+.login-form hr {
+  width: 40%;
+  display: inline-block;
+  margin-top: 2rem;
+}
+
+.login-form span {
+  position: relative;
+  bottom: 0.5rem;
+  padding: 1rem;
+}
+
+.contwithgoogle {
+  margin-top: 3rem;
+}
+
+.contwithgoogle a {
+  border: 1px solid blue;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.contwithgoogle a:hover {
+  background-color: blue;
+  color: white;
+}

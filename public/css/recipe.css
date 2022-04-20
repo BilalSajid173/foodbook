@@ -2,6 +2,7 @@
   background-color: #fd5d5d;
   text-align: center;
   padding: 5% 12%;
+  min-height: 100vh; /*to push the footer to the bottom */
   font-family: "Varela Round", sans-serif;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),

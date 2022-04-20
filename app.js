@@ -26,27 +26,27 @@ const recipes = [
         desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
     },
     {
-        name: "Chicken",
+        name: "Chickennn",
         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus est pellentesque elit ullamcorper dignissim cras.Mauris si"
     },
     {
-        name: "Mutton",
+        name: "Muttonnn",
         desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
     },
     {
-        name: "Biryani",
+        name: "Biryaniii",
         desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
     },
     {
-        name: "Chicken",
+        name: "Chickenn",
         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus est pellentesque elit ullamcorper dignissim cras.Mauris si"
     },
     {
-        name: "Mutton",
+        name: "Muttonn",
         desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
     },
     {
-        name: "Biryani",
+        name: "Biryanii",
         desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
     }
 ]
@@ -102,6 +102,18 @@ app.get("/all-recipes/:classification", (req, res) => {
 
 
 })
+
+app.get("/login", (req, res) => {
+    res.render("login");
+})
+
+app.post("/login", (req, res) => {
+    const username = req.body.username
+    const password = req.body.password
+    console.log(username, password);
+    res.redirect("/")
+})
+
 app.listen(3000, (err) => {
     if (!err) {
         console.log("Server running on port 3000")

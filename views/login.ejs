@@ -1,0 +1,49 @@
+<%- include("partials/header.ejs") %>
+
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <%- include("partials/navbar.ejs") %>
+
+        <div class="wrapper-login container-fluid">
+
+            <div class="login-form">
+                <form action="/login" method="POST">
+                    <div class="email">
+                        <i class="fa-solid fa-circle-user user-icon"></i>
+                        <input type="email" name="username" id="" placeholder="Email">
+                    </div>
+                    <div class="password">
+                        <i class="fa-solid fa-key"></i>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button type="submit" class="btn btn-outline-primary btn-lg">Login</button>
+                    </div>
+                </form>
+                <div class="register-now">
+                    <a href="/">Register Now!!</a>
+                </div>
+                <hr><span>OR</span>
+                <hr>
+
+                <div class="contwithgoogle">
+                    <a class="btn" href="/" role="button">
+                        <i class="fa-brands fa-google"></i>
+                        Sign In with Google
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <%- include("partials/footer.ejs") %>
