@@ -22,18 +22,22 @@
 .top-div a {
   display: block;
   text-decoration: none;
-  color: black;
+  color: red;
 }
 
 .top-div a:hover {
   color: white;
 }
 
+.get-started-div {
+  margin-top: 4%;
+}
+
 .top-div button {
   outline: none !important;
   box-shadow: none !important;
-  border: 1px solid black !important;
-  margin-top: 4%;
+  padding: 0 !important;
+  font-size: 1.7rem;
 }
 
 /****************Carousel**************/
@@ -47,10 +51,10 @@
 }
 
 .myCarousel img {
-  min-height: 250px;
+  /* min-height: 60%; */
   border-radius: 10px;
   margin-bottom: 2rem;
-  box-shadow: 2px 2px 5px #eaece3, -2px -2px 5px #e2e5dd;
+  /*box-shadow: 2px 2px 5px #eaece3, -2px -2px 5px #e2e5dd;*/
 }
 
 /***************Top Rated**************/
@@ -77,6 +81,7 @@
   text-decoration: none;
   color: black;
   width: 30%;
+  height: 350px;
   margin-bottom: 2rem;
   margin-right: 1rem;
 }
@@ -85,11 +90,11 @@
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  border: 1px solid rgba(227, 195, 195, 0.517);
+  /* border: 1px solid rgba(227, 195, 195, 0.517); */
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 2%;
+  /* padding: 2%; */
   transition: all 0.3s ease-in;
 }
 
@@ -97,9 +102,21 @@
   box-shadow: 2px 2px 5px #6e7836, -2px 0 5px #657b41;
 }
 
-.recipe-card p {
-  text-align: justify;
+.imagewrap {
+  width: 100%;
+  height: 80%;
 }
+
+.recipe-card img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+/* .recipe-card p {
+  text-align: justify;
+} */
 
 .more-recipes {
   text-decoration: none;

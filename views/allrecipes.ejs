@@ -7,22 +7,24 @@
     <%- include("partials/navbar.ejs") %>
 
 
-    <div class="top-rated container-fluid">
-        <h1><%=category%> Recipes</h1>
-        <div class="top-rated-recipes">
-            <% recipes.forEach(recipe=> {%>
-                <a href="/recipes/<%=recipe.name%>">
-                    <div class="recipe-card">
-                        <h2>
-                            <%=recipe.name%>
-                        </h2>
-                        <p>
-                            <%=recipe.desc%>
-                        </p>
-                    </div>
-                </a>
-                <%}) %>
+        <div class="top-rated container-fluid">
+            <h1>
+                <%=category%> Recipes
+            </h1>
+            <div class="top-rated-recipes">
+                <% recipes.forEach(recipe=> {%>
+                    <a href="/recipes/<%=recipe.name%>">
+                        <div class="recipe-card">
+                            <div class="imagewrap">
+                                <img src="/uploaded-images/<%=recipe.imageNames[0]%> " alt="">
+                            </div>
+                            <h2>
+                                <%=recipe.name%>
+                            </h2>
+                        </div>
+                    </a>
+                    <%}) %>
+            </div>
         </div>
-    </div>
 
-    <%- include("partials/footer.ejs") %> 
+        <%- include("partials/footer.ejs") %>

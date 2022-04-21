@@ -4,17 +4,22 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/footer.css">
 
-    <%- include("partials/navbar.ejs") %> 
+    <%- include("partials/navbar.ejs") %>
 
-<div class="add-recipe container-fluid">
+        <div class="add-recipe container-fluid">
 
-    <form action="/add-recipe" method="POST">
-        <label for="#title">Title:</label>
-        <input type="text" name="title" id="title" >
-        <label for="#desc">Description:</label>
-        <textarea name="desc" id="desc" rows="5"></textarea>
-        <button name="submit-btn" class="btn btn-outline-dark" type="submit">Add Recipe</button>
-    </form>
+            <h2>Add A New Recipe</h2>
+            <form action="/add-recipe" method="POST" enctype="multipart/form-data">
 
-</div>
-<%- include("partials/footer.ejs") %> 
+                <input type="text" name="title" id="title" placeholder="Name Of The Recipe" required>
+                <textarea name="ingredients" id="ingredients" rows="5" placeholder="Ingredients Required" required></textarea>
+                <textarea name="description" id="description" rows="15" placeholder="How To Make" required></textarea>
+
+                <label for="#recipe-img">Upload Recipe Images(Max 5)</label>
+                <input type="file" name="recipe-images" multiple id="recipe-img" required>
+
+                <button name="submit-btn" class="btn btn-outline-success btn-lg" type="submit">Add Recipe</button>
+            </form>
+
+        </div>
+        <%- include("partials/footer.ejs") %>

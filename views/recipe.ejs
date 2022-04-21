@@ -10,6 +10,34 @@
             <h1>
                 <%=recipe.name%>
             </h1>
+            <div id="carouselControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval=3000>
+                <div class="carousel-inner myCarousel">
+                    <div class="carousel-item active">
+                        <img src="/uploaded-images/<%=recipe.imageNames[0]%>" class="d-block w-100" alt="...">
+                    </div>
+                    <% for(let i=1;i< recipe.imageNames.length;i++){%>
+                        <div class="carousel-item">
+                            <img src="/uploaded-images/<%=recipe.imageNames[i]%> " class="d-block w-100" alt="...">
+                        </div>
+                        <% } %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <h2>Ingredients Required</h2>
+            <p>
+                <%=recipe.ingredients%>
+            </p>
+            <h2>Directions</h2>
             <p>
                 <%=recipe.desc%>
             </p>

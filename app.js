@@ -2,7 +2,19 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
+const multer = require('multer')
+//const upload = multer({ dest: 'public/uploaded-images/' })
 
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploaded-images/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname)
+    }
+})
+
+const upload = multer({ storage: fileStorage })
 
 const app = express()
 
@@ -13,42 +25,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 const recipes = [
-    {
-        name: "Chicken",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus est pellentesque elit ullamcorper dignissim cras.Mauris si"
-    },
-    {
-        name: "Mutton",
-        desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
-    },
-    {
-        name: "Biryani",
-        desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
-    },
-    {
-        name: "Chickennn",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus est pellentesque elit ullamcorper dignissim cras.Mauris si"
-    },
-    {
-        name: "Muttonnn",
-        desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
-    },
-    {
-        name: "Biryaniii",
-        desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
-    },
-    {
-        name: "Chickenn",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus est pellentesque elit ullamcorper dignissim cras.Mauris si"
-    },
-    {
-        name: "Muttonn",
-        desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
-    },
-    {
-        name: "Biryanii",
-        desc: "Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non. Dignissim sodales ut eu sem integer vitae justo eget."
-    }
 ]
 
 
@@ -64,15 +40,27 @@ app.get("/add-recipe", (req, res) => {
     res.render("addrecipe")
 })
 
-app.post("/add-recipe", (req, res) => {
+app.post("/add-recipe", upload.array('recipe-images', 5), (req, res) => {
+    //console.log(req.files[0].filename);
+    const imageNames = []
+
+    req.files.forEach(file => {
+        imageNames.push(file.filename);
+    })
+
+    //console.log(fileNames)
     const title = req.body.title
-    const desc = req.body.desc
+    const desc = req.body.description
+    const ingredients = req.body.ingredients
     const newRecipe = {
         name: title,
-        desc: desc
+        desc: desc,
+        ingredients: ingredients,
+        imageNames: [...imageNames]
     }
-    recipes.push(newRecipe)
 
+    //console.log(newRecipe)
+    recipes.push(newRecipe)
     res.redirect("/")
 })
 
