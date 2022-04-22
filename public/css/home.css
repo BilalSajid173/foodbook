@@ -127,6 +127,33 @@
   color: #657b41;
 }
 
+/******************View All**************************/
+
+.view-all-recipes {
+  /* background-color: #fd5d5da1; */
+  padding: 5% 10%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.view-all-recipes button {
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: 1.7rem;
+}
+
+.view-all-recipes a {
+  text-decoration: none;
+  color: red;
+  display: block;
+}
+
+.view-all-recipes a:hover {
+  color: white;
+}
+
 /******************Media Queries*******************/
 
 @media only screen and (max-width: 990px) {

@@ -40,7 +40,7 @@ const Recipe = mongoose.model("Recipe", recipeSchema)
 
 app.get("/", (req, res) => {
     Recipe.find(function (err, recipes) {
-        res.render("home", ({ recipes: recipes.slice(0, 5) }))
+        res.render("home", ({ recipes: recipes.slice(0, 3) }))
     })
 })
 
@@ -92,13 +92,28 @@ app.get("/all-recipes/:classification", (req, res) => {
 
     const category = req.params.classification
 
-    Recipe.find(function (err, recipes) {
-        if (category === "Latest") {
-            res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 5) }))
-        } else {
+    // Recipe.find(function (err, recipes) {
+    //     if (category === "Latest") {
+    //         res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 3) }))
+    //     } else {
+    //         res.render("allrecipes", ({ category: category, recipes: recipes }))
+    //     }
+    // })
+
+    if (category === "Latest") {
+        Recipe.find((err, recipes) => {
+            res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 3) }))
+        })
+    } else if (category === "Top-Rated") {
+        Recipe.find((err, recipes) => {
             res.render("allrecipes", ({ category: category, recipes: recipes }))
-        }
-    })
+        })
+    } else {
+        console.log("here")
+        Recipe.find((err, recipes) => {
+            res.render("allrecipes", ({ category: category, recipes: recipes }))
+        })
+    }
 
 
 })
