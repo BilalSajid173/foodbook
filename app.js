@@ -3,7 +3,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
 const multer = require('multer')
-//const upload = multer({ dest: 'public/uploaded-images/' })
+const mongoose = require("mongoose")
+
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -23,17 +24,24 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
+mongoose.connect("mongodb://localhost:27017/recipesDB")
 
-const recipes = [
-]
+const recipeSchema = new mongoose.Schema({
+    name: String,
+    desc: String,
+    ingredients: String,
+    imageNames: [String]
+})
+
+const Recipe = mongoose.model("Recipe", recipeSchema)
 
 
-
-
-
+/**************************Routes*************************/
 
 app.get("/", (req, res) => {
-    res.render("home", ({ recipes: recipes.slice(0, 5) }))
+    Recipe.find(function (err, recipes) {
+        res.render("home", ({ recipes: recipes.slice(0, 5) }))
+    })
 })
 
 app.get("/add-recipe", (req, res) => {
@@ -52,29 +60,31 @@ app.post("/add-recipe", upload.array('recipe-images', 5), (req, res) => {
     const title = req.body.title
     const desc = req.body.description
     const ingredients = req.body.ingredients
-    const newRecipe = {
+    const newRecipe = new Recipe({
         name: title,
         desc: desc,
         ingredients: ingredients,
         imageNames: [...imageNames]
-    }
+    })
+    newRecipe.save(function (err) {
+        if (!err) {
+            res.redirect("/")
+        }
+    })
 
     //console.log(newRecipe)
-    recipes.push(newRecipe)
-    res.redirect("/")
 })
 
-app.get("/about", (req, res) => {
-    res.render("about")
-})
+app.get("/recipes/:recipeId", (req, res) => {
+    const recipeId = req.params.recipeId
 
-app.get("/recipes/:recipe", (req, res) => {
-    const recipeName = req.params.recipe
-
-    recipes.forEach(recipe => {
-        if (recipeName === recipe.name) {
-            res.render("recipe", ({ recipe: recipe }))
-        }
+    Recipe.find(function (err, recipes) {
+        recipes.forEach(recipe => {
+            //console.log(recipe.id);
+            if (recipe.id === recipeId) {
+                res.render("recipe", ({ recipe: recipe }))
+            }
+        })
     })
 })
 
@@ -82,11 +92,13 @@ app.get("/all-recipes/:classification", (req, res) => {
 
     const category = req.params.classification
 
-    if (category === "Latest") {
-        res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 5) }))
-    } else {
-        res.render("allrecipes", ({ category: category, recipes: recipes }))
-    }
+    Recipe.find(function(err, recipes){
+        if (category === "Latest") {
+            res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 5) }))
+        } else {
+            res.render("allrecipes", ({ category: category, recipes: recipes }))
+        }
+    })
 
 
 })
@@ -100,6 +112,10 @@ app.post("/login", (req, res) => {
     const password = req.body.password
     console.log(username, password);
     res.redirect("/")
+})
+
+app.get("/about", (req, res) => {
+    res.render("about")
 })
 
 app.listen(3000, (err) => {

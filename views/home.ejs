@@ -48,7 +48,7 @@
             <h1>Top Rated Recipes</h1>
             <div class="top-rated-recipes">
                 <% recipes.forEach(recipe=> {%>
-                    <a href="/recipes/<%=recipe.name%>">
+                    <a href="/recipes/<%=recipe.id%>">
                         <div class="recipe-card">
                             <div class="imagewrap">
                                 <img src="/uploaded-images/<%=recipe.imageNames[0]%> " alt="">
@@ -67,7 +67,7 @@
             <h1>Latest Recipes</h1>
             <div class="top-rated-recipes">
                 <% recipes.forEach(recipe=> {%>
-                    <a href="/recipes/<%=recipe.name%>">
+                    <a href="/recipes/<%=recipe.id%>">
                         <div class="recipe-card">
                             <div class="imagewrap">
                                 <img src="/uploaded-images/<%=recipe.imageNames[0]%> " alt="">
