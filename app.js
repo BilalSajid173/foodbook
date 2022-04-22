@@ -92,7 +92,7 @@ app.get("/all-recipes/:classification", (req, res) => {
 
     const category = req.params.classification
 
-    Recipe.find(function(err, recipes){
+    Recipe.find(function (err, recipes) {
         if (category === "Latest") {
             res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 5) }))
         } else {
@@ -103,6 +103,37 @@ app.get("/all-recipes/:classification", (req, res) => {
 
 })
 
+
+app.post("/search", (req, res) => {
+
+    //console.log(req.body.searchId)
+
+    const searchq = req.body.searchId
+    // const foundMatches = []
+    var rgxp = new RegExp(searchq, "i");
+
+    Recipe.find({ name: rgxp })
+        .then((results) => {
+            res.render("search", ({ searchQuery: searchq, recipes: results }))
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    // Recipe.find(function (err, recipes) {
+
+    //     recipes.forEach(recipe => {
+    //         if (recipe.name.match(rgxp)) {
+    //             console.log("here")
+    //             foundMatches.push(recipe)
+    //             console.log(foundMatches)
+    //         }
+    //     })
+
+    //     res.render("search", ({ searchQuery: searchq, recipes: foundMatches }))
+    // })
+
+    // console.log(foundMatches.length)
+})
 app.get("/login", (req, res) => {
     res.render("login");
 })
