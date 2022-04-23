@@ -8,17 +8,31 @@
 
         <div class="profile-wrapper">
             <div class="profile-info">
-                <h2>Welcome Bilal Sajid</h2>
-                <p>Email: bsajid173@gmail.com</p>
-                <p>Phone: 7310587987</p>
-                <p>Age: 22</p>
-                <p>Address: San Francisco, California</p>
-                <p>Hobbies: Football, Cooking, Listening to music</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h2>Welcome <%=user.name%>
+                </h2>
+                <p>Email: <%=user.username%>
+                </p>
+                <%if(user.phoneNum){%>
+                    <p>Phone: <%=user.phoneNum%>
+                    </p>
+                    <%}%>
+                        <%if(user.age){%>
+                            <p>Age: <%=user.age%>
+                            </p>
+                            <%}%>
+                                <%if(user.address){%>
+                                    <p>Address: <%=user.address%>
+                                    </p>
+                                    <%}%>
+                                        <%if(user.hobbies){%>
+                                            <p>Hobbies: <%=user.hobbies%>
+                                            </p>
+                                            <%}%>
+                                                <%if(user.about){%>
+                                                    <p>
+                                                        <%=user.about%>
+                                                    </p>
+                                                    <%}%>
             </div>
             <div class="user-buttons">
                 <button class="d-grid gap-2 col-3 btn btn-outline-success btn-lg"><a href="/add-recipe">Add
@@ -30,24 +44,29 @@
         <div class="my-recipes container-fluid">
             <h1>My Recipes</h1>
             <div class="user-recipes">
-                <% recipes.forEach(recipe=> {%>
-                    <a href="/recipes/<%=recipe.id%>">
-                        <div class="recipe-card">
-                            <div class="imagewrap">
-                                <div class="edit-btn">
-                                    <form action="/edit-recipe" method="get">
-                                        <input type="hidden" value="<%=recipe.id%>" name="recipeId">
-                                        <button type="submit"><i class="fa-solid fa-pen"></i></button>
-                                    </form>
+                <%if(recipes.length===0){%>
+                    <h4>You don't have any recipes yet</h4>
+                    <%} else {%>
+                        <% recipes.forEach(recipe=> {%>
+                            <a href="/recipes/<%=recipe.id%>">
+                                <div class="recipe-card">
+                                    <div class="imagewrap">
+                                        <div class="edit-btn">
+                                            <form action="/edit-recipe" method="get">
+                                                <input type="hidden" value="<%=recipe.id%>" name="recipeId">
+                                                <button type="submit"><i class="fa-solid fa-pen"></i></button>
+                                            </form>
+                                        </div>
+                                        <img src="/uploaded-images/<%=recipe.imageNames[0]%> " alt="">
+                                    </div>
+                                    <h2>
+                                        <%=recipe.name%>
+                                    </h2>
                                 </div>
-                                <img src="/uploaded-images/<%=recipe.imageNames[0]%> " alt="">
-                            </div>
-                            <h2>
-                                <%=recipe.name%>
-                            </h2>
-                        </div>
-                    </a>
-                    <%}) %>
+                            </a>
+                            <%}) %>
+                                <%}%>
+
             </div>
         </div>
 

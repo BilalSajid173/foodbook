@@ -1,9 +1,13 @@
 
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
 const multer = require('multer')
 const mongoose = require("mongoose")
+const session = require('express-session')
+const passport = require("passport")
+const passportLocalMongoose = require("passport-local-mongoose")
 
 
 const fileStorage = multer.diskStorage({
@@ -18,37 +22,61 @@ const fileStorage = multer.diskStorage({
 const upload = multer({ storage: fileStorage })
 
 const app = express()
-
 app.set('view engine', 'ejs')
-
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 mongoose.connect("mongodb://localhost:27017/recipesDB")
+
+const userSchema = new mongoose.Schema({
+    name: String,
+    username: String,
+    password: String,
+    address: String,
+    about: String,
+    recipesId: [String],
+    age: String,
+    phoneNum: Number,
+    hobbies: String,
+    profilePicName: String,
+    favRecipesId: [String]
+})
+
+userSchema.plugin(passportLocalMongoose)
 
 const recipeSchema = new mongoose.Schema({
     name: String,
     desc: String,
     ingredients: String,
-    imageNames: [String]
+    imageNames: [String],
+    addedBy: userSchema,
+    favouritedBy: [userSchema],
 })
 
 const Recipe = mongoose.model("Recipe", recipeSchema)
 
-// const userSchema = new mongoose.Schema({
-//     name: String,
-//     email: String,
-//     password: String,
-//     address: String,
-//     about: String,
-//     recipes: [recipeSchema],
-//     age: String,
-//     phoneNum: Number,
-//     hobbies: String,
-//     profilePicName: String
-// })
+const User = mongoose.model("User", userSchema)
 
-// const User = mongoose.model("User", userSchema)
+passport.use(User.createStrategy());
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id)
+});
+
+passport.deserializeUser(function (id, done) {
+    User.findById(id, function (err, user) {
+        done(err, user)
+    })
+});
 
 /**************************Routes*************************/
 
@@ -56,37 +84,6 @@ app.get("/", (req, res) => {
     Recipe.find(function (err, recipes) {
         res.render("home", ({ recipes: recipes.slice(0, 3) }))
     })
-})
-
-app.get("/add-recipe", (req, res) => {
-    res.render("addrecipe")
-})
-
-app.post("/add-recipe", upload.array('recipe-images', 5), (req, res) => {
-    //console.log(req.files[0].filename);
-    const imageNames = []
-
-    req.files.forEach(file => {
-        imageNames.push(file.filename);
-    })
-
-    //console.log(fileNames)
-    const title = req.body.title
-    const desc = req.body.description
-    const ingredients = req.body.ingredients
-    const newRecipe = new Recipe({
-        name: title,
-        desc: desc,
-        ingredients: ingredients,
-        imageNames: [...imageNames]
-    })
-    newRecipe.save(function (err) {
-        if (!err) {
-            res.redirect("/")
-        }
-    })
-
-    //console.log(newRecipe)
 })
 
 app.get("/recipes/:recipeId", (req, res) => {
@@ -132,7 +129,6 @@ app.get("/all-recipes/:classification", (req, res) => {
 
 })
 
-
 app.post("/search", (req, res) => {
 
     //console.log(req.body.searchId)
@@ -163,6 +159,8 @@ app.post("/search", (req, res) => {
 
     // console.log(foundMatches.length)
 })
+
+
 app.get("/login", (req, res) => {
     res.render("login");
 })
@@ -171,25 +169,98 @@ app.get("/signup", (req, res) => {
     res.render("signup")
 })
 
-app.post("/signup", (req, res) => {
-    const name = req.body.username
-    const email = req.body.emailId
-    const password = req.body.password
-    const address = req.body.address
-    const about = req.body.about
+app.get("/landing-page", (req, res) => {
 
-    console.log(name, email, password, address, about);
-
-    Recipe.find((err, recipes) => {
-        res.render("landing-page", ({ recipes: recipes }))
-    })
+    if (req.isAuthenticated()) {
+        res.render("landing-page", ({ user: req.user, recipes: [] }))
+    } else {
+        res.redirect("/login")
+    }
 })
 
 
-app.post("/login", (req, res) => {
-    const username = req.body.username
-    const password = req.body.password
-    console.log(username, password);
+app.post("/signup", (req, res) => {
+
+    const newUser = new User({
+        name: req.body.name,
+        username: req.body.username,
+        address: req.body.address,
+        about: req.body.about,
+        age: null,
+        phoneNum: null,
+        hobbies: null
+    })
+
+    User.register(newUser, req.body.password, function (err, user) {
+        if (err) {
+            console.log(err);
+            res.redirect("/signup")
+        } else {
+            passport.authenticate("local")(req, res, function () {
+                res.redirect("/landing-page")
+            })
+        }
+    })
+
+})
+
+app.post('/login',
+    passport.authenticate('local', { failureRedirect: '/signup', failureMessage: true }),
+    function (req, res) {
+        res.redirect("landing-page");
+    });
+
+// app.post("/login", (req, res) => {
+//     const user = new User({
+//         username: req.body.username,
+//         password: req.body.password
+//     })
+
+//     req.login(user, function (err) {
+//         if (err) {
+//             console.log(err);
+//         } else if (!user) {
+//             passport.authenticate("local", { failureRedirect: '/signup', failureMessage: true })(req, res, function () {
+//                 res.redirect("/landing-page")
+//             })
+//             // res.redirect("/signup")
+//         }
+//     })
+// })
+
+app.get("/add-recipe", (req, res) => {
+    res.render("addrecipe")
+})
+
+app.post("/add-recipe", upload.array('recipe-images', 5), (req, res) => {
+    //console.log(req.files[0].filename);
+    const imageNames = []
+
+    req.files.forEach(file => {
+        imageNames.push(file.filename);
+    })
+
+    //console.log(fileNames)
+    const title = req.body.title
+    const desc = req.body.description
+    const ingredients = req.body.ingredients
+    const newRecipe = new Recipe({
+        name: title,
+        desc: desc,
+        ingredients: ingredients,
+        imageNames: [...imageNames]
+    })
+    newRecipe.save(function (err) {
+        if (!err) {
+            res.redirect("/")
+        }
+    })
+
+    //console.log(newRecipe)
+})
+
+app.get("/logout", function (req, res) {
+    req.logout();
     res.redirect("/")
 })
 
