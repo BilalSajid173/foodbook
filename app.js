@@ -37,30 +37,31 @@ app.use(passport.session())
 
 mongoose.connect("mongodb://localhost:27017/recipesDB")
 
+const recipeSchema = new mongoose.Schema({
+    name: String,
+    desc: String,
+    ingredients: String,
+    imageNames: [String],
+    addedBy: String,
+    favouritedBy: [String],
+})
+
+
 const userSchema = new mongoose.Schema({
     name: String,
     username: String,
     password: String,
     address: String,
     about: String,
-    recipesId: [String],
+    recipes: [recipeSchema],
     age: String,
     phoneNum: Number,
     hobbies: String,
     profilePicName: String,
-    favRecipesId: [String]
+    favRecipes: [recipeSchema]
 })
 
 userSchema.plugin(passportLocalMongoose)
-
-const recipeSchema = new mongoose.Schema({
-    name: String,
-    desc: String,
-    ingredients: String,
-    imageNames: [String],
-    addedBy: userSchema,
-    favouritedBy: [userSchema],
-})
 
 const Recipe = mongoose.model("Recipe", recipeSchema)
 
@@ -172,7 +173,7 @@ app.get("/signup", (req, res) => {
 app.get("/landing-page", (req, res) => {
 
     if (req.isAuthenticated()) {
-        res.render("landing-page", ({ user: req.user, recipes: [] }))
+        res.render("landing-page", ({ user: req.user, recipes: req.user.recipes }))
     } else {
         res.redirect("/login")
     }
@@ -229,18 +230,23 @@ app.post('/login',
 // })
 
 app.get("/add-recipe", (req, res) => {
-    res.render("addrecipe")
+    if (req.isAuthenticated()) {
+        res.render("addrecipe")
+    } else {
+        res.redirect("/login")
+    }
+
 })
 
 app.post("/add-recipe", upload.array('recipe-images', 5), (req, res) => {
     //console.log(req.files[0].filename);
+
     const imageNames = []
 
     req.files.forEach(file => {
         imageNames.push(file.filename);
     })
 
-    //console.log(fileNames)
     const title = req.body.title
     const desc = req.body.description
     const ingredients = req.body.ingredients
@@ -248,14 +254,22 @@ app.post("/add-recipe", upload.array('recipe-images', 5), (req, res) => {
         name: title,
         desc: desc,
         ingredients: ingredients,
-        imageNames: [...imageNames]
+        imageNames: [...imageNames],
+        addedBy: req.user.name
     })
     newRecipe.save(function (err) {
         if (!err) {
-            res.redirect("/")
+            req.user.recipes.push(newRecipe)
+            req.user.save()
+            res.render("landing-page", ({ user: req.user, recipes: req.user.recipes }))
+        } else {
+            console.log(err)
         }
     })
 
+
+
+    //console.log(fileNames)
     //console.log(newRecipe)
 })
 
