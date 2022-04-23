@@ -1,4 +1,4 @@
-.wrapper-login {
+.wrapper-signup {
   width: 100%;
   /* min-height: 100vh; */
   background: linear-gradient(
@@ -14,14 +14,18 @@
   font-family: "Varela Round", sans-serif;
 }
 
-.login-form {
+.signup-form h2{
+    margin-bottom: 2rem;
+}
+
+.signup-form {
   width: 60%;
   text-align: center;
-  padding: 7% 10%;
+  padding: 5% 10%;
   background-color: white;
 }
 
-.login-form button {
+.signup-form button {
   margin-top: 1rem;
   outline: none !important;
   box-shadow: none !important;
@@ -29,17 +33,12 @@
 }
 
 .email,
-.password {
+.password,
+.name {
   margin: 1rem 0;
 }
 
-.login-form i {
-  padding: 0.6rem;
-  margin-right: 0;
-  font-size: 1.5rem;
-}
-
-.login-form input {
+.signup-form input {
   outline: 0;
   padding: 0.5rem;
   border: 1.5px solid gray;
@@ -47,28 +46,27 @@
   width: 60%;
 }
 
-.register-now {
+.login-now {
   margin-top: 2rem;
 }
-.register-now a {
+.login-now a {
   text-decoration: none;
-  margin-left: 50%;
 }
 
-.login-form hr {
+.signup-form hr {
   width: 40%;
   display: inline-block;
   margin-top: 2rem;
 }
 
-.login-form span {
+.signup-form span {
   position: relative;
   bottom: 0.7rem;
   padding: 1rem;
 }
 
 .contwithgoogle {
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 .contwithgoogle a {

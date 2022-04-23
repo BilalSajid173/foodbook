@@ -1,0 +1,54 @@
+<%- include("partials/header.ejs") %>
+
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <%- include("partials/navbar.ejs") %>
+
+        <div class="wrapper-signup container-fluid">
+
+            <div class="signup-form">
+
+                <h2>Create A Free Account Now!!</h2>
+                <form action="/signup" method="POST">
+                    <div class="name">
+                        <input type="text" name="username" id="" placeholder="Name*" required autocomplete="off">
+                    </div>
+                    <div class="email">
+                        <input type="email" name="emailId" id="" placeholder="Email*" required autocomplete="off">
+                    </div>
+                    <div class="password">
+                        <input type="password" name="password" placeholder="Password*" required autocomplete="off">
+                    </div>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button type="submit" class="btn btn-outline-primary btn-lg">Sign Up</button>
+                    </div>
+                </form>
+                <div class="login-now">
+                    <h6>Already a Member? <a href="/login">Login</a></h6>
+                </div>
+                <hr><span>OR</span>
+                <hr>
+
+                <div class="contwithgoogle">
+                    <a class="btn" href="/" role="button">
+                        <i class="fa-brands fa-google"></i>
+                        Continue with Google
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- <form action="/signup" method="post">
+            <input type="text" name="username" placeholder="Name" autocomplete="off" required>
+            <input type="email" name="emailID" placeholder="Email Address" autocomplete="off" required>
+            <input type="password" name="password" id="" placeholder="Password" autocomplete="off" required>
+            <button class="btn btn-outline-light btn-lg">Create Account</button>
+        </form> -->
+
+
+
+
+
+        <%- include("partials/footer.ejs") %>

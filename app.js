@@ -153,6 +153,20 @@ app.get("/login", (req, res) => {
     res.render("login");
 })
 
+app.get("/signup", (req, res) => {
+    res.render("signup")
+})
+
+app.post("/signup", (req, res) => {
+    const name = req.body.username
+    const email = req.body.emailId
+    const password = req.body.password
+
+    console.log(name, email, password);
+    res.redirect("/")
+})
+
+
 app.post("/login", (req, res) => {
     const username = req.body.username
     const password = req.body.password
