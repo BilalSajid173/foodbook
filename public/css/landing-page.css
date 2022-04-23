@@ -1,0 +1,126 @@
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5% 12%;
+  padding-bottom: 2%;
+  font-family: "Merriweather Sans", sans-serif;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("/images/user-home-bg-img.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.profile-info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.profile-info h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.user-buttons {
+  width: 60%;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.user-buttons a {
+  display: block;
+  text-decoration: none;
+  color: rgb(151, 67, 67);
+}
+
+.user-buttons a:hover {
+  color: white;
+}
+
+.user-buttons button {
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: 1.7rem;
+  margin: 1rem;
+}
+
+.my-recipes {
+  background-color: #fd5d5d;
+  text-align: center;
+  padding: 5% 12%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.myrecipes h1 {
+  margin-bottom: 2rem;
+}
+
+.user-recipes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.user-recipes a {
+  text-decoration: none;
+  color: black;
+  width: 30%;
+  height: 350px;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+}
+
+.recipe-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  /* border: 1px solid rgba(227, 195, 195, 0.517); */
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  /* padding: 2%; */
+  transition: all 0.3s ease-in;
+}
+
+.recipe-card:hover {
+  box-shadow: 2px 2px 5px #6e7836, -2px 0 5px #657b41;
+}
+
+.imagewrap {
+  position: relative;
+  width: 100%;
+  height: 80%;
+}
+
+.edit-btn{
+    position: absolute;
+    right: 0;
+}
+
+.edit-btn button{
+    border-top-right-radius: 10px;
+    outline: 0;
+    border: 0;
+    font-size: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.edit-btn button:hover{
+    transform: scale(1.5);
+    border-top-right-radius: 0px;
+}
+
+.recipe-card img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  height: 100%;
+}

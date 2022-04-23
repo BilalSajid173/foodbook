@@ -35,6 +35,20 @@ const recipeSchema = new mongoose.Schema({
 
 const Recipe = mongoose.model("Recipe", recipeSchema)
 
+// const userSchema = new mongoose.Schema({
+//     name: String,
+//     email: String,
+//     password: String,
+//     address: String,
+//     about: String,
+//     recipes: [recipeSchema],
+//     age: String,
+//     phoneNum: Number,
+//     hobbies: String,
+//     profilePicName: String
+// })
+
+// const User = mongoose.model("User", userSchema)
 
 /**************************Routes*************************/
 
@@ -161,9 +175,14 @@ app.post("/signup", (req, res) => {
     const name = req.body.username
     const email = req.body.emailId
     const password = req.body.password
+    const address = req.body.address
+    const about = req.body.about
 
-    console.log(name, email, password);
-    res.redirect("/")
+    console.log(name, email, password, address, about);
+
+    Recipe.find((err, recipes) => {
+        res.render("landing-page", ({ recipes: recipes }))
+    })
 })
 
 

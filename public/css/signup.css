@@ -34,11 +34,11 @@
 
 .email,
 .password,
-.name {
+.name, .address, .about {
   margin: 1rem 0;
 }
 
-.signup-form input {
+.signup-form input,.signup-form textarea {
   outline: 0;
   padding: 0.5rem;
   border: 1.5px solid gray;
