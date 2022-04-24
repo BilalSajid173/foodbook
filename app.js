@@ -300,6 +300,62 @@ app.post("/edit-profile", (req, res) => {
 
 })
 
+
+app.get("/edit-recipe/:recipeID", (req, res) => {
+    if (req.isAuthenticated()) {
+
+        console.log(req.params.recipeID)
+        Recipe.findOne({ _id: req.params.recipeID }, (err, foundRecipe) => {
+            if (foundRecipe) {
+                console.log(foundRecipe)
+                res.render("edit-recipe", ({ recipe: foundRecipe }))
+            }
+        })
+    } else {
+        res.redirect("/login")
+    }
+})
+
+
+//find a better way for this one
+app.post("/edit-recipe", upload.array('recipe-images', 5), (req, res) => {
+
+    const recipeId = req.body.recipeId
+
+    Recipe.findOne({ _id: recipeId }, (err, foundRecipe) => {
+        if (foundRecipe) {
+            foundRecipe.name = req.body.title
+            foundRecipe.desc = req.body.description
+            foundRecipe.ingredients = req.body.ingredients
+
+            if (req.files.length !== 0) {
+                const imageNames = []
+
+                req.files.forEach(file => {
+                    imageNames.push(file.filename);
+                })
+                foundRecipe.imageNames = []
+                foundRecipe.imageNames = [...imageNames]
+            }
+
+            foundRecipe.save()
+
+            User.findOneAndUpdate({ _id: req.user.id }, { $pull: { recipes: { _id: req.body.recipeId } } }, function (err, foundList) {
+                if (!err) {
+                    //console.log(foundRecipe)
+                    req.user.recipes.push(foundRecipe)
+                    req.user.save().then(result => {
+                        res.redirect("/landing-page")
+                    })
+                } else {
+                    console.log(err);
+                }
+
+            })
+        }
+    })
+})
+
 app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/")

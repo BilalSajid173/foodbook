@@ -1,0 +1,70 @@
+.edit-recipe {
+  padding: 5% 30%;
+  font-family: "Varela Round", sans-serif;
+  /* font-size: 2rem; */
+  color: rgb(76, 9, 9);
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("/images/add-recipe-bg-img.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.edit-recipe h2 {
+  text-align: center;
+}
+
+.edit-recipe input[type="text"] {
+  font-size: 1.3rem;
+  display: block;
+  width: 100%;
+  outline: 0;
+  border: 0;
+  /* border-bottom: 1px solid rgb(192, 26, 26); */
+  margin: 1.5rem 0;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+}
+
+.edit-recipe textarea {
+  font-size: 1rem;
+  display: block;
+  width: 100%;
+  outline: 0;
+  resize: none;
+  overflow: auto;
+  margin: 1rem 0;
+  border-radius: 10px;
+  border: 0;
+  padding: 1rem;
+}
+
+.edit-recipe input[type="file"] {
+  display: block;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.edit-recipe button {
+  width: 40%;
+  margin-left: 50%;
+  transform: translateX(-50%); /*for centering*/
+  outline: none !important;
+  box-shadow: none !important;
+  color: black;
+  /* border: 1px solid black !important; */
+}
+
+.edit-recipe label {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}
+
+.edit-recipe form {
+  text-align: center;
+}
+
+.edit-recipe h4 {
+  text-align: left;
+  margin-top: 2rem;
+}

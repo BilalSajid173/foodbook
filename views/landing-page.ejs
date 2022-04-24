@@ -48,22 +48,24 @@
                     <h4>You don't have any recipes yet</h4>
                     <%} else {%>
                         <% recipes.forEach(recipe=> {%>
-                            <a href="/recipes/<%=recipe.id%>">
-                                <div class="recipe-card">
-                                    <div class="imagewrap">
-                                        <div class="edit-btn">
-                                            <form action="/edit-recipe/<%=recipe.id%>" method="get">
-                                                <input type="hidden" value="<%=recipe.id%>" name="recipeId">
-                                                <button type="submit"><i class="fa-solid fa-pen"></i></button>
-                                            </form>
+
+                            <div class="recipe-wrapper">
+                                <a href="/recipes/<%=recipe.id%>">
+                                    <div class="recipe-card">
+                                        <div class="imagewrap">
+                                            <img src="/uploaded-images/<%=recipe.imageNames[0]%> " alt="">
                                         </div>
-                                        <img src="/uploaded-images/<%=recipe.imageNames[0]%> " alt="">
+                                        <h2>
+                                            <%=recipe.name%>
+                                        </h2>
                                     </div>
-                                    <h2>
-                                        <%=recipe.name%>
-                                    </h2>
+                                </a>
+                                <div class="edit-btn">
+                                    <a href="/edit-recipe/<%=recipe.id%>"><button type="submit"><i
+                                                class="fa-solid fa-pen"></i></button></a>
                                 </div>
-                            </a>
+                            </div>
+
                             <%}) %>
                                 <%}%>
 
