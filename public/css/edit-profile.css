@@ -1,0 +1,60 @@
+.wrapper-edit-profile {
+  width: 100%;
+  /* min-height: 100vh; */
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("/images/login-page-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: "Varela Round", sans-serif;
+}
+
+.edit-profile-form h2 {
+  margin-bottom: 2rem;
+}
+
+.edit-profile-form {
+  width: 60%;
+  text-align: center;
+  padding: 5% 10%;
+  background-color: white;
+}
+
+.edit-profile-form button {
+  margin-top: 1rem;
+  outline: none !important;
+  box-shadow: none !important;
+  /* border: 1px solid black !important; */
+}
+
+.edit-profile-form form{
+    text-align: left;
+}
+
+.email,
+.name,
+.address,
+.about,
+.age,
+.phone,
+.hobbies {
+  margin: 1rem 0;
+}
+
+.edit-profile-form input,
+.edit-profile-form textarea {
+  outline: 0;
+  padding: 0.2rem 0.5rem;
+  border: 0;
+  border-bottom: 1.5px solid gray;
+  width: 100%;
+}
+
+.edit-profile-form label{
+    font-size: 1.5rem;
+}

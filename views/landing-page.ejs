@@ -52,7 +52,7 @@
                                 <div class="recipe-card">
                                     <div class="imagewrap">
                                         <div class="edit-btn">
-                                            <form action="/edit-recipe" method="get">
+                                            <form action="/edit-recipe/<%=recipe.id%>" method="get">
                                                 <input type="hidden" value="<%=recipe.id%>" name="recipeId">
                                                 <button type="submit"><i class="fa-solid fa-pen"></i></button>
                                             </form>

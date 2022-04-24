@@ -273,6 +273,33 @@ app.post("/add-recipe", upload.array('recipe-images', 5), (req, res) => {
     //console.log(newRecipe)
 })
 
+app.get("/edit-profile", (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render("edit-profile", ({ user: req.user }))
+    } else {
+        res.redirect("/login")
+    }
+})
+
+app.post("/edit-profile", (req, res) => {
+
+    req.user.name = req.body.name
+    req.user.username = req.body.username
+    req.user.address = req.body.address
+    req.user.age = req.body.age
+    req.user.phoneNum = req.body.phone
+    req.user.hobbies = req.body.hobbies
+    req.user.about = req.body.about
+    req.user.save()
+        .then(savedUser => {
+
+            res.redirect("/landing-page")
+        }).catch(err => {
+            console.log(err);
+        })
+
+})
+
 app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/")
