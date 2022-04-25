@@ -89,7 +89,7 @@ app.get("/", (req, res) => {
 
 app.get("/recipes/:recipeId", (req, res) => {
     const recipeId = req.params.recipeId
-
+    console.log(recipeId)
     //console.log(req.user);
     let fav = false
     if (req.user) {
@@ -429,8 +429,28 @@ app.post("/remove-from-favourite", (req, res) => {
     })
 })
 
-app.get("/favourite-recipes", (req,res) => {
-    
+app.get("/favourite-recipes", (req, res) => {
+    if (req.isAuthenticated()) {
+
+        const favrecipes = []
+        let counter = 0
+        req.user.favRecipesId.forEach(id => {
+            //console.log(id)
+            Recipe.findById(id, (err, foundRecipe) => {
+                counter++
+                if (foundRecipe) {
+                    favrecipes.push(foundRecipe)
+                }
+
+                if (counter === req.user.favRecipesId.length) {
+                    res.render('favourites', ({ recipes: favrecipes }))
+                }
+            })
+
+        })
+    } else {
+        res.redirect("/login")
+    }
 })
 app.get("/logout", function (req, res) {
     req.logout();
