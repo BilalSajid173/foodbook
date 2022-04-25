@@ -58,7 +58,7 @@
   font-family: "Montserrat", sans-serif;
 }
 
-.myrecipes h1 {
+.my-recipes h1 {
   margin-bottom: 2rem;
 }
 
@@ -72,7 +72,7 @@
 .recipe-wrapper {
   position: relative;
   width: 30%;
-  height: 350px;
+  height: 400px;
   margin-bottom: 2rem;
   margin-right: 1rem;
 }
@@ -90,9 +90,13 @@
   /* border: 1px solid rgba(227, 195, 195, 0.517); */
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: rgb(236, 114, 114);
   /* padding: 2%; */
   transition: all 0.3s ease-in;
+}
+
+.recipe-card h3{
+  margin-top: 1rem;
 }
 
 .recipe-card:hover {
@@ -101,7 +105,8 @@
 
 .imagewrap {
   width: 100%;
-  height: 80%;
+  min-height: 70%;
+  max-height: 70%;
 }
 
 .recipe-card img {
@@ -124,24 +129,26 @@
   height: 100%;
 }
 
-.edit-btn button, .delete-btn button{
-    border-top-right-radius: 10px;
-    outline: 0;
-    border: 0;
-    font-size: 1.5rem;
-    transition: all 0.3s ease-in-out;
+.edit-btn button,
+.delete-btn button {
+  border-top-right-radius: 10px;
+  outline: 0;
+  border: 0;
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in-out;
 }
 
-.edit-btn button:hover, .delete-btn button:hover{
-    transform: scale(1.5);
-    border-top-right-radius: 0px;
+.edit-btn button:hover,
+.delete-btn button:hover {
+  transform: scale(1.5);
+  border-top-right-radius: 0px;
 }
 
-.delete-btn button{
+.delete-btn button {
   border-top-right-radius: 0;
 }
 
-.delete-btn{
+.delete-btn {
   position: absolute;
   top: 0;
   right: 11%;
