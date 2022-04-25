@@ -340,7 +340,7 @@ app.post("/edit-recipe", upload.array('recipe-images', 5), (req, res) => {
 
             foundRecipe.save()
 
-            User.findOneAndUpdate({ _id: req.user.id }, { $pull: { recipes: { _id: req.body.recipeId } } }, function (err, foundList) {
+            User.findOneAndUpdate({ _id: req.user.id }, { $pull: { recipes: { _id: req.body.recipeId } } }, function (err, foundRecipe) {
                 if (!err) {
                     //console.log(foundRecipe)
                     req.user.recipes.push(foundRecipe)
@@ -355,6 +355,27 @@ app.post("/edit-recipe", upload.array('recipe-images', 5), (req, res) => {
         }
     })
 })
+
+
+app.post("/delete-recipe", (req, res) => {
+
+    const recipeId = req.body.recipeId
+
+    Recipe.findOneAndDelete({ _id: recipeId }, (err, foundRecipe) => {
+        if (!err) {
+            console.log(foundRecipe);
+            User.findOneAndUpdate({ _id: req.user.id }, { $pull: { recipes: { _id: recipeId } } }, function (err, foundRecipe) {
+                if (!err) {
+                    res.redirect("/landing-page")
+                } else {
+                    console.log(err);
+                }
+
+            })
+        }
+    })
+})
+
 
 app.get("/logout", function (req, res) {
     req.logout();

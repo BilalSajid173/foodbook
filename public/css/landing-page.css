@@ -124,7 +124,7 @@
   height: 100%;
 }
 
-.edit-btn button{
+.edit-btn button, .delete-btn button{
     border-top-right-radius: 10px;
     outline: 0;
     border: 0;
@@ -132,7 +132,17 @@
     transition: all 0.3s ease-in-out;
 }
 
-.edit-btn button:hover{
+.edit-btn button:hover, .delete-btn button:hover{
     transform: scale(1.5);
     border-top-right-radius: 0px;
+}
+
+.delete-btn button{
+  border-top-right-radius: 0;
+}
+
+.delete-btn{
+  position: absolute;
+  top: 0;
+  right: 11%;
 }
