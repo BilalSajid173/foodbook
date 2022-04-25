@@ -24,6 +24,15 @@
             <p>
                 <%=recipe.desc%>
             </p>
+
+            <div class="favourite-btn">
+                <form action="/<%if(fav){%>remove-from-favourite<%}else{%>add-to-favourite<%}%>" method="post">
+                    <input type="hidden" name="recipeId" value="<%=recipe.id%>">
+                    <button class="btn btn-outline-success btn-lg" type="submit">
+                        <%if(fav){%>Remove from Favourites<%}else{%>Add to Favourites<%}%>
+                    </button>
+                </form>
+            </div>
         </div>
 
         <%- include("partials/footer.ejs") %>

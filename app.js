@@ -58,7 +58,7 @@ const userSchema = new mongoose.Schema({
     phoneNum: Number,
     hobbies: String,
     profilePicName: String,
-    favRecipes: [recipeSchema]
+    favRecipesId: [String]
 })
 
 userSchema.plugin(passportLocalMongoose)
@@ -90,11 +90,23 @@ app.get("/", (req, res) => {
 app.get("/recipes/:recipeId", (req, res) => {
     const recipeId = req.params.recipeId
 
+    //console.log(req.user);
+    let fav = false
+    if (req.user) {
+        const foundfavourite = req.user.favRecipesId.find(recipeID => {
+            return recipeID === recipeId
+        })
+        if (foundfavourite) {
+            //console.log(foundfavourite)
+            fav = true
+        }
+    }
+
     Recipe.find(function (err, recipes) {
         recipes.forEach(recipe => {
             //console.log(recipe.id);
             if (recipe.id === recipeId) {
-                res.render("recipe", ({ recipe: recipe }))
+                res.render("recipe", ({ recipe: recipe, fav: fav }))
             }
         })
     })
@@ -377,6 +389,49 @@ app.post("/delete-recipe", (req, res) => {
 })
 
 
+app.post("/add-to-favourite", (req, res) => {
+    if (req.isAuthenticated()) {
+
+        const recid = req.body.recipeId
+        Recipe.findOne({ _id: recid }, (err, foundRecipe) => {
+            if (foundRecipe) {
+                foundRecipe.favouritedBy.push(req.user.id)
+                foundRecipe.save()
+                req.user.favRecipesId.push(recid)
+                req.user.save()
+                res.redirect(`/recipes/${recid}`)
+            }
+        })
+    } else {
+        res.redirect("/login")
+    }
+})
+
+app.post("/remove-from-favourite", (req, res) => {
+    const recid = req.body.recipeId
+
+    Recipe.findOne({ _id: recid }, (err, recipe) => {
+        console.log(recipe)
+        const userindex = recipe.favouritedBy.findIndex(id => {
+            return id === req.user.id
+        })
+
+        recipe.favouritedBy.splice(userindex, userindex + 1)
+        recipe.save()
+
+        const recindex = req.user.favRecipesId.findIndex(id => {
+            return id === recid
+        })
+
+        req.user.favRecipesId.splice(recindex, recindex + 1)
+        req.user.save()
+        res.redirect(`/recipes/${recid}`)
+    })
+})
+
+app.get("/favourite-recipes", (req,res) => {
+    
+})
 app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/")
