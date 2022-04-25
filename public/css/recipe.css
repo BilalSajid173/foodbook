@@ -53,6 +53,11 @@
   left: 73%;
 }
 
+.favourite-btn button{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 @media(max-width: 1250px){
   .favourite-btn{
     left: 77%;

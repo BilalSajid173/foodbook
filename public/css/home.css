@@ -1,5 +1,5 @@
 .heading-section {
-  height: 500px;
+  height: 550px;
   padding: 7% 12%;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
@@ -43,7 +43,7 @@
 /****************Carousel**************/
 
 .myCarousel {
-  background-color: #fd5d5da1;
+  background-color: rgb(236, 114, 114);
   padding: 5% 12%;
   text-align: center;
   font-family: "Varela Round", sans-serif;
@@ -59,25 +59,25 @@
 
 /***************Top Rated**************/
 
-.top-rated {
+.top-rated, .latest {
   background-color: #fd5d5d;
   text-align: center;
   padding: 5% 12%;
   font-family: "Montserrat", sans-serif;
 }
 
-.top-rated h1 {
+.top-rated h1, .latest h1 {
   margin-bottom: 2rem;
 }
 
-.top-rated-recipes {
+.top-rated-recipes, .latest-recipes {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin: 2rem 0;
 }
 
-.top-rated-recipes a {
+.top-rated-recipes a, .latest-recipes a {
   text-decoration: none;
   color: black;
   width: 30%;
@@ -139,10 +139,17 @@
   color: #657b41;
 }
 
+/***************************Latest Recipes Extra**************************************/
+
+.latest{
+  padding-top: 0;
+}
+
+
 /******************View All**************************/
 
 .view-all-recipes {
-  /* background-color: #fd5d5da1; */
+  background-color: #fd5d5d;
   padding: 5% 10%;
   display: flex;
   justify-content: center;
@@ -158,7 +165,7 @@
 
 .view-all-recipes a {
   text-decoration: none;
-  color: red;
+  color: rgb(62, 15, 15);
   display: block;
 }
 
@@ -170,6 +177,6 @@
 
 @media only screen and (max-width: 990px) {
   .heading-section {
-    height: 300px;
+    height: 400px;
   }
 }
