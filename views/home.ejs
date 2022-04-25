@@ -47,7 +47,7 @@
         <div class="top-rated container-fluid">
             <h1>Top Rated Recipes</h1>
             <div class="top-rated-recipes">
-                <% recipes.forEach(recipe=> {%>
+                <% topRated.forEach(recipe=> {%>
                     <a href="/recipes/<%=recipe.id%>">
                         <div class="recipe-card">
                             <div class="imagewrap">
@@ -67,7 +67,7 @@
         <div class="latest container-fluid">
             <h1>Latest Recipes</h1>
             <div class="latest-recipes">
-                <% recipes.forEach(recipe=> {%>
+                <% latest.forEach(recipe=> {%>
                     <a href="/recipes/<%=recipe.id%>">
                         <div class="recipe-card">
                             <div class="imagewrap">

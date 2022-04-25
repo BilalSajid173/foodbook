@@ -83,7 +83,16 @@ passport.deserializeUser(function (id, done) {
 
 app.get("/", (req, res) => {
     Recipe.find(function (err, recipes) {
-        res.render("home", ({ recipes: recipes.slice(0, 3) }))
+
+        const latest = recipes.slice(recipes.length - 2)
+        recipes.sort((a,b) => {
+            // console.log(a.favouritedBy.length);
+            // console.log(b.favouritedBy.length);
+            return a.favouritedBy.length - b.favouritedBy.length
+        })
+
+        const topRated = recipes.slice(recipes.length - 2)
+        res.render("home", ({ topRated: topRated, latest: latest }))
     })
 })
 
@@ -126,15 +135,24 @@ app.get("/all-recipes/:classification", (req, res) => {
 
     if (category === "Latest") {
         Recipe.find((err, recipes) => {
-            res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 3) }))
+            res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 2) }))
         })
     } else if (category === "Top-Rated") {
         Recipe.find((err, recipes) => {
-            res.render("allrecipes", ({ category: category, recipes: recipes }))
+
+            recipes.sort((a,b) => {
+                return a.favouritedBy.length - b.favouritedBy.length
+            })
+    
+            const topRated = recipes.slice(recipes.length - 2)
+            res.render("allrecipes", ({ category: category, recipes: topRated }))
         })
     } else {
-        console.log("here")
+        //console.log("here")
         Recipe.find((err, recipes) => {
+            recipes.sort((a,b) => {
+                return b.favouritedBy.length - a.favouritedBy.length
+            })
             res.render("allrecipes", ({ category: category, recipes: recipes }))
         })
     }
