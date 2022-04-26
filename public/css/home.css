@@ -1,6 +1,6 @@
 .heading-section {
   height: 550px;
-  padding: 7% 12%;
+  padding: 10% 12%;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -10,19 +10,26 @@
   background-position: center;
   display: flex;
   justify-content: center;
-  font-family: "Varela Round", sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.top-div h1{
+  font-size: 3rem;
 }
 
 .top-div {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .top-div a {
   display: block;
   text-decoration: none;
-  color: red;
+  color: rgb(76, 13, 13);
 }
 
 .top-div a:hover {
@@ -175,8 +182,35 @@
 
 /******************Media Queries*******************/
 
-@media only screen and (max-width: 990px) {
+@media only screen and (max-width: 1000px) {
   .heading-section {
-    height: 400px;
+    height: 450px;
+    padding: 12% 8%;
+  }
+}
+
+
+@media only screen and (max-width: 700px) {
+  
+  .heading-section {
+    padding: 12% 4%;
+  }
+
+  .top-div h1{
+    font-size: 2.3rem;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .get-started-div{
+    width: 70%;
+  }
+
+  .top-div h1{
+    font-size: 2rem;
+  }
+
+  .top-div p{
+    font-weight: 500;
   }
 }

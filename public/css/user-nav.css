@@ -38,7 +38,8 @@ body {
 
 @media (max-width: 700px) {
   .nav-container {
-    padding: 2% 5% 1.5%;
+    padding: 2% 3% 1.5%;
+    font-weight: 400;
   }
 
   .navbar-brand {
@@ -51,9 +52,9 @@ body {
   }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 400px) {
   .nav-container {
-    padding: 2% 3% 1.5%;
+    padding: 2% 2% 1.5%;
   }
 
   .navbar-brand {
