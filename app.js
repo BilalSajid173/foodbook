@@ -82,56 +82,56 @@ passport.deserializeUser(function (id, done) {
 /**************************Routes*************************/
 
 app.get("/", (req, res) => {
+
     Recipe.find(function (err, recipes) {
 
-        const latest = recipes.slice(recipes.length - 2)
-        recipes.sort((a,b) => {
-            // console.log(a.favouritedBy.length);
-            // console.log(b.favouritedBy.length);
-            return a.favouritedBy.length - b.favouritedBy.length
-        })
+        if (recipes) {
+            const latest = recipes.slice(recipes.length - 2)
+            recipes.sort((a, b) => {
+                return a.favouritedBy.length - b.favouritedBy.length
+            })
 
-        const topRated = recipes.slice(recipes.length - 2)
-        res.render("home", ({ topRated: topRated, latest: latest }))
+            const topRated = recipes.slice(recipes.length - 2)
+            res.render("home", ({ topRated: topRated, latest: latest }))
+
+        } else {
+            console.log(err)
+        }
     })
 })
 
 app.get("/recipes/:recipeId", (req, res) => {
     const recipeId = req.params.recipeId
-    console.log(recipeId)
-    //console.log(req.user);
+
+    //logic for favourite recipes
     let fav = false
     if (req.user) {
         const foundfavourite = req.user.favRecipesId.find(recipeID => {
             return recipeID === recipeId
         })
         if (foundfavourite) {
-            //console.log(foundfavourite)
             fav = true
         }
     }
 
     Recipe.find(function (err, recipes) {
-        recipes.forEach(recipe => {
-            //console.log(recipe.id);
-            if (recipe.id === recipeId) {
-                res.render("recipe", ({ recipe: recipe, fav: fav }))
-            }
-        })
+
+        if (recipes) {
+            recipes.forEach(recipe => {
+                //console.log(recipe.id);
+                if (recipe.id === recipeId) {
+                    res.render("recipe", ({ recipe: recipe, fav: fav }))
+                }
+            })
+        } else {
+            console.log(err);
+        }
     })
 })
 
 app.get("/all-recipes/:classification", (req, res) => {
 
     const category = req.params.classification
-
-    // Recipe.find(function (err, recipes) {
-    //     if (category === "Latest") {
-    //         res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 3) }))
-    //     } else {
-    //         res.render("allrecipes", ({ category: category, recipes: recipes }))
-    //     }
-    // })
 
     if (category === "Latest") {
         Recipe.find((err, recipes) => {
@@ -140,32 +140,26 @@ app.get("/all-recipes/:classification", (req, res) => {
     } else if (category === "Top-Rated") {
         Recipe.find((err, recipes) => {
 
-            recipes.sort((a,b) => {
+            recipes.sort((a, b) => {
                 return a.favouritedBy.length - b.favouritedBy.length
             })
-    
+
             const topRated = recipes.slice(recipes.length - 2)
             res.render("allrecipes", ({ category: category, recipes: topRated }))
         })
     } else {
-        //console.log("here")
         Recipe.find((err, recipes) => {
-            recipes.sort((a,b) => {
+            recipes.sort((a, b) => {
                 return b.favouritedBy.length - a.favouritedBy.length
             })
             res.render("allrecipes", ({ category: category, recipes: recipes }))
         })
     }
-
-
 })
 
 app.post("/search", (req, res) => {
 
-    //console.log(req.body.searchId)
-
     const searchq = req.body.searchId
-    // const foundMatches = []
     var rgxp = new RegExp(searchq, "i");
 
     Recipe.find({ name: rgxp })
@@ -175,20 +169,6 @@ app.post("/search", (req, res) => {
         .catch(err => {
             console.log(err);
         })
-    // Recipe.find(function (err, recipes) {
-
-    //     recipes.forEach(recipe => {
-    //         if (recipe.name.match(rgxp)) {
-    //             console.log("here")
-    //             foundMatches.push(recipe)
-    //             console.log(foundMatches)
-    //         }
-    //     })
-
-    //     res.render("search", ({ searchQuery: searchq, recipes: foundMatches }))
-    // })
-
-    // console.log(foundMatches.length)
 })
 
 
@@ -241,24 +221,6 @@ app.post('/login',
         res.redirect("landing-page");
     });
 
-// app.post("/login", (req, res) => {
-//     const user = new User({
-//         username: req.body.username,
-//         password: req.body.password
-//     })
-
-//     req.login(user, function (err) {
-//         if (err) {
-//             console.log(err);
-//         } else if (!user) {
-//             passport.authenticate("local", { failureRedirect: '/signup', failureMessage: true })(req, res, function () {
-//                 res.redirect("/landing-page")
-//             })
-//             // res.redirect("/signup")
-//         }
-//     })
-// })
-
 app.get("/add-recipe", (req, res) => {
     if (req.isAuthenticated()) {
         res.render("addrecipe")
@@ -269,7 +231,6 @@ app.get("/add-recipe", (req, res) => {
 })
 
 app.post("/add-recipe", upload.array('recipe-images', 5), (req, res) => {
-    //console.log(req.files[0].filename);
 
     const imageNames = []
 
@@ -287,20 +248,16 @@ app.post("/add-recipe", upload.array('recipe-images', 5), (req, res) => {
         imageNames: [...imageNames],
         addedBy: req.user.name
     })
+
     newRecipe.save(function (err) {
         if (!err) {
             req.user.recipes.push(newRecipe)
             req.user.save()
-            res.render("landing-page", ({ user: req.user, recipes: req.user.recipes }))
+            res.redirect("/landing-page")
         } else {
             console.log(err)
         }
     })
-
-
-
-    //console.log(fileNames)
-    //console.log(newRecipe)
 })
 
 app.get("/edit-profile", (req, res) => {
@@ -322,9 +279,9 @@ app.post("/edit-profile", (req, res) => {
     req.user.about = req.body.about
     req.user.save()
         .then(savedUser => {
-
             res.redirect("/landing-page")
-        }).catch(err => {
+        })
+        .catch(err => {
             console.log(err);
         })
 
@@ -332,13 +289,14 @@ app.post("/edit-profile", (req, res) => {
 
 
 app.get("/edit-recipe/:recipeID", (req, res) => {
-    if (req.isAuthenticated()) {
 
-        console.log(req.params.recipeID)
+    if (req.isAuthenticated()) {
+        //console.log(req.params.recipeID)
         Recipe.findOne({ _id: req.params.recipeID }, (err, foundRecipe) => {
             if (foundRecipe) {
-                console.log(foundRecipe)
                 res.render("edit-recipe", ({ recipe: foundRecipe }))
+            } else {
+                console.log(err);
             }
         })
     } else {
@@ -359,6 +317,7 @@ app.post("/edit-recipe", upload.array('recipe-images', 5), (req, res) => {
             foundRecipe.ingredients = req.body.ingredients
 
             if (req.files.length !== 0) {
+                //if new images are added, then we overwrite the previous ones otherwise we keep them
                 const imageNames = []
 
                 req.files.forEach(file => {
@@ -374,9 +333,10 @@ app.post("/edit-recipe", upload.array('recipe-images', 5), (req, res) => {
                 if (!err) {
                     //console.log(foundRecipe)
                     req.user.recipes.push(foundRecipe)
-                    req.user.save().then(result => {
-                        res.redirect("/landing-page")
-                    })
+                    req.user.save()
+                        .then(result => {
+                            res.redirect("/landing-page")
+                        })
                 } else {
                     console.log(err);
                 }
@@ -393,7 +353,7 @@ app.post("/delete-recipe", (req, res) => {
 
     Recipe.findOneAndDelete({ _id: recipeId }, (err, foundRecipe) => {
         if (!err) {
-            console.log(foundRecipe);
+            //console.log(foundRecipe);
             User.findOneAndUpdate({ _id: req.user.id }, { $pull: { recipes: { _id: recipeId } } }, function (err, foundRecipe) {
                 if (!err) {
                     res.redirect("/landing-page")
@@ -402,6 +362,8 @@ app.post("/delete-recipe", (req, res) => {
                 }
 
             })
+        } else {
+            console.log(err);
         }
     })
 })
@@ -409,7 +371,6 @@ app.post("/delete-recipe", (req, res) => {
 
 app.post("/add-to-favourite", (req, res) => {
     if (req.isAuthenticated()) {
-
         const recid = req.body.recipeId
         Recipe.findOne({ _id: recid }, (err, foundRecipe) => {
             if (foundRecipe) {
@@ -418,6 +379,8 @@ app.post("/add-to-favourite", (req, res) => {
                 req.user.favRecipesId.push(recid)
                 req.user.save()
                 res.redirect(`/recipes/${recid}`)
+            } else {
+                console.log(err)
             }
         })
     } else {
@@ -429,31 +392,37 @@ app.post("/remove-from-favourite", (req, res) => {
     const recid = req.body.recipeId
 
     Recipe.findOne({ _id: recid }, (err, recipe) => {
-        console.log(recipe)
-        const userindex = recipe.favouritedBy.findIndex(id => {
-            return id === req.user.id
-        })
 
-        recipe.favouritedBy.splice(userindex, userindex + 1)
-        recipe.save()
+        if (recipe) {
+            const userindex = recipe.favouritedBy.findIndex(id => {
+                return id === req.user.id
+            })
 
-        const recindex = req.user.favRecipesId.findIndex(id => {
-            return id === recid
-        })
+            recipe.favouritedBy.splice(userindex, userindex + 1)
+            recipe.save()
 
-        req.user.favRecipesId.splice(recindex, recindex + 1)
-        req.user.save()
-        res.redirect(`/recipes/${recid}`)
+            const recindex = req.user.favRecipesId.findIndex(id => {
+                return id === recid
+            })
+
+            req.user.favRecipesId.splice(recindex, recindex + 1)
+            req.user.save()
+                .then(() => {
+                    res.redirect(`/recipes/${recid}`)
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
     })
 })
 
 app.get("/favourite-recipes", (req, res) => {
-    if (req.isAuthenticated()) {
 
+    if (req.isAuthenticated()) {
         const favrecipes = []
         let counter = 0
         req.user.favRecipesId.forEach(id => {
-            //console.log(id)
             Recipe.findById(id, (err, foundRecipe) => {
                 counter++
                 if (foundRecipe) {
@@ -464,14 +433,14 @@ app.get("/favourite-recipes", (req, res) => {
                     res.render('favourites', ({ recipes: favrecipes }))
                 }
             })
-
         })
     } else {
         res.redirect("/login")
     }
 })
+
 app.get("/logout", function (req, res) {
-    req.logout();
+    req.logout()
     res.redirect("/")
 })
 
