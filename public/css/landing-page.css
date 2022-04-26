@@ -71,11 +71,12 @@
 
 .recipe-wrapper {
   position: relative;
-  width: 30%;
+  width: 31%;
   height: 400px;
   margin-bottom: 2rem;
   margin-right: 1rem;
 }
+
 .recipe-wrapper a {
   text-decoration: none;
   color: black;
@@ -95,7 +96,7 @@
   transition: all 0.3s ease-in;
 }
 
-.recipe-card h3{
+.recipe-card h3 {
   margin-top: 1rem;
 }
 
@@ -152,4 +153,61 @@
   position: absolute;
   top: 0;
   right: 11%;
+}
+
+/*****************************Media Queries***************************/
+
+@media only screen and (max-width: 1400px) {
+  .my-recipes {
+    padding: 5% 8%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .my-recipes {
+    padding: 5% 4%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .my-recipes {
+    padding: 5% 10%;
+  }
+
+  .recipe-wrapper {
+    width: 47%;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .my-recipes {
+    padding: 5%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .my-recipes {
+    padding: 10% 12%;
+  }
+
+  .recipe-wrapper {
+    width: 80%;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .my-recipes {
+    padding: 10% 7%;
+  }
+
+  .recipe-wrapper {
+    width: 90%;
+  }
+}
+
+@media (max-width: 400px) {
+  .my-recipes {
+    padding: 10% 4%;
+  }
 }

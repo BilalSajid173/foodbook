@@ -3,6 +3,7 @@
   text-align: center;
   padding: 5% 12%;
   font-family: "Montserrat", sans-serif;
+  margin-top: -1px;
 }
 
 .top-rated h1 {
@@ -19,7 +20,7 @@
 .top-rated-recipes a {
   text-decoration: none;
   color: black;
-  width: 30%;
+  width: 31%;
   height: 400px;
   margin-bottom: 2rem;
   margin-right: 1rem;
@@ -38,11 +39,11 @@
   transition: all 0.3s ease-in;
 }
 
-.recipe-card h3{
+.recipe-card h3 {
   margin-top: 1rem;
 }
 
-.recipe-card span{
+.recipe-card span {
   position: absolute;
   bottom: 5px;
   right: 5px;
@@ -51,10 +52,6 @@
 .recipe-card:hover {
   box-shadow: 2px 2px 5px #6e7836, -2px 0 5px #657b41;
 }
-
-/* .recipe-card p {
-  text-align: justify;
-} */
 
 .imagewrap {
   width: 100%;
@@ -69,11 +66,59 @@
   height: 100%;
 }
 
-/* .more-recipes {
-  text-decoration: none;
-  color: white;
+/*****************************Media Queries***************************/
+
+@media only screen and (max-width: 1400px) {
+  .top-rated {
+    padding: 5% 8%;
+  }
 }
 
-.more-recipes:hover {
-  color: #657b41;
-} */
+@media only screen and (max-width: 1200px) {
+  .top-rated {
+    padding: 5% 4%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .top-rated {
+    padding: 5% 10%;
+  }
+
+  .top-rated-recipes a {
+    width: 47%;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .top-rated {
+    padding: 5%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .top-rated {
+    padding: 10% 12%;
+  }
+
+  .top-rated-recipes a {
+    width: 80%;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .top-rated {
+    padding: 10% 7%;
+  }
+
+  .top-rated-recipes a {
+    width: 90%;
+  }
+}
+
+@media (max-width: 400px) {
+  .top-rated {
+    padding: 10% 4%;
+  }
+}
