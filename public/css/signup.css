@@ -14,31 +14,32 @@
   font-family: "Varela Round", sans-serif;
 }
 
-.signup-form h2{
-    margin-bottom: 2rem;
+.signup-form h2 {
+  margin-bottom: 2rem;
 }
 
 .signup-form {
   width: 60%;
   text-align: center;
   padding: 5% 10%;
-  background-color: white;
 }
 
 .signup-form button {
   margin-top: 1rem;
   outline: none !important;
   box-shadow: none !important;
-  /* border: 1px solid black !important; */
 }
 
 .email,
 .password,
-.name, .address, .about {
+.name,
+.address,
+.about {
   margin: 1rem 0;
 }
 
-.signup-form input,.signup-form textarea {
+.signup-form input,
+.signup-form textarea {
   outline: 0;
   padding: 0.5rem;
   border: 1.5px solid gray;
@@ -78,4 +79,45 @@
 .contwithgoogle a:hover {
   background-color: blue;
   color: white;
+}
+
+/****************************Media Queries******************************************/
+
+@media (max-width: 1400px) {
+  .signup-form {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .signup-form {
+    padding: 10% 0;
+  }
+
+  .signup-form input,
+  .signup-form textarea {
+    width: 70%;
+  }
+}
+
+@media (max-width: 700px) {
+  .signup-form input,
+  .signup-form textarea {
+    width: 80%;
+  }
+}
+
+@media (max-width: 500px) {
+  .signup-form {
+    width: 90%;
+    padding: 15% 0;
+  }
+  .signup-form input,
+  .signup-form textarea {
+    width: 100%;
+  }
+
+  .signup-form hr {
+    width: 30%;
+  }
 }

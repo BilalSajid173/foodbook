@@ -1,6 +1,6 @@
 .wrapper-login {
   width: 100%;
-  /* min-height: 100vh; */
+  min-height: 100vh;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -10,15 +10,17 @@
   background-position: center;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   font-family: "Varela Round", sans-serif;
+  padding: 0;
 }
 
 .login-form {
   width: 60%;
   text-align: center;
   padding: 7% 10%;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .login-form button {
@@ -80,4 +82,39 @@
 .contwithgoogle a:hover {
   background-color: blue;
   color: white;
+}
+
+/****************************Media Queries******************************************/
+
+@media (max-width: 1400px) {
+  .login-form {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .login-form {
+    padding: 10% 0 !important;
+  }
+
+  .login-form input {
+    width: 70%;
+  }
+}
+
+@media (max-width: 700px) {
+  .login-form input {
+    width: 80%;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-form {
+    width: 100%;
+    padding: 15% 0;
+  }
+
+  .login-form hr {
+    width: 30%;
+  }
 }

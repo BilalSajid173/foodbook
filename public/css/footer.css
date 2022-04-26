@@ -3,7 +3,7 @@
   padding: 3% 12% 1%;
 }
 
-.footerdivision{
+.footerdivision {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -12,14 +12,14 @@
 
 .footer-section a {
   text-decoration: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin: 10px;
 }
 
 .facebook {
-  font-size: 1.5rem;
   background-color: rgb(111, 111, 129);
-  border-radius: 50%;
   padding: 10px 23px;
-  margin: 10px;
   color: rgb(0, 0, 87);
 }
 
@@ -29,11 +29,8 @@
 }
 
 .twitter {
-  font-size: 1.5rem;
   background-color: rgb(43, 28, 40);
-  border-radius: 50%;
   padding: 10px 18px;
-  margin: 10px;
   color: blue;
 }
 
@@ -43,11 +40,8 @@
 }
 
 .github {
-  font-size: 1.5rem;
   background-color: rgb(218, 97, 97);
-  border-radius: 50%;
   padding: 10px 18px;
-  margin: 10px;
   color: rgb(69, 33, 33);
 }
 
@@ -57,11 +51,8 @@
 }
 
 .linkedIn {
-  font-size: 1.5rem;
   background-color: blueviolet;
-  border-radius: 50%;
   padding: 10px 20px;
-  margin: 10px;
   color: white;
 }
 
@@ -75,4 +66,30 @@
   background-color: rgb(120, 116, 178);
   padding-bottom: 1rem;
   margin-bottom: 0;
+}
+
+/*********************************Media Queries***********************************/
+
+@media (max-width:500px) {
+  
+  .footer-section{
+    padding: 5% 12% 1%;
+  }
+
+  .footer-section a {
+    font-size: 1rem;
+    margin: 5px;
+  }
+
+  .facebook{
+    padding: 10px 18px;
+  }
+
+  .twitter, .github{
+    padding: 10px 14px;
+  }
+
+  .linkedIn{
+    padding: 10px 16px;
+  }
 }

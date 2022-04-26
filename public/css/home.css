@@ -252,6 +252,14 @@
     width: 80%;
     margin-right: 0;
   }
+
+  .view-all-recipes{
+    padding: 10%;
+  }
+  
+  .view-all-recipes button {
+    width: 80%;
+  }
 }
 
 @media (max-width: 500px) {
