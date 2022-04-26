@@ -86,12 +86,13 @@ app.get("/", (req, res) => {
     Recipe.find(function (err, recipes) {
 
         if (recipes) {
-            const latest = recipes.slice(recipes.length - 2)
+            const latest = recipes.slice(recipes.length - 6)
+            latest.reverse()
             recipes.sort((a, b) => {
-                return a.favouritedBy.length - b.favouritedBy.length
+                return b.favouritedBy.length - a.favouritedBy.length
             })
 
-            const topRated = recipes.slice(recipes.length - 2)
+            const topRated = recipes.slice(0,6)
             res.render("home", ({ topRated: topRated, latest: latest }))
 
         } else {
@@ -135,16 +136,16 @@ app.get("/all-recipes/:classification", (req, res) => {
 
     if (category === "Latest") {
         Recipe.find((err, recipes) => {
-            res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 2) }))
+            res.render("allrecipes", ({ category: category, recipes: recipes.slice(recipes.length - 12).reverse() }))
         })
     } else if (category === "Top-Rated") {
         Recipe.find((err, recipes) => {
 
             recipes.sort((a, b) => {
-                return a.favouritedBy.length - b.favouritedBy.length
+                return b.favouritedBy.length - a.favouritedBy.length
             })
 
-            const topRated = recipes.slice(recipes.length - 2)
+            const topRated = recipes.slice(0,12)
             res.render("allrecipes", ({ category: category, recipes: topRated }))
         })
     } else {
