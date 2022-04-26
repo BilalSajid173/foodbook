@@ -3,6 +3,7 @@
   text-align: center;
   padding: 5% 12%;
   font-family: "Montserrat", sans-serif;
+  min-height: 66vh;
 }
 
 .favourite h1 {

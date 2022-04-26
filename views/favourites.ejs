@@ -10,19 +10,22 @@
         <div class="favourite container-fluid">
             <h1>Favourite Recipes</h1>
             <div class="favourite-recipes">
-                <% recipes.forEach(recipe=> {%>
-                    <a href="/recipes/<%=recipe.id%>">
-                        <div class="recipe-card">
-                            <div class="imagewrap">
-                                <img src="/uploaded-images/<%=recipe.imageNames[0]%> " alt="">
-                            </div>
-                            <h3>
-                                <%=recipe.name%>
-                            </h3>
-                            <span>Added By: <%=recipe.addedBy%></span>
-                        </div>
-                    </a>
-                    <%}) %>
+                <%if(recipes.length===0){%>
+                    <h2>You Have No Favourites Yet!</h2>
+                    <%}%>
+                        <% recipes.forEach(recipe=> {%>
+                            <a href="/recipes/<%=recipe.id%>">
+                                <div class="recipe-card">
+                                    <div class="imagewrap">
+                                        <img src="/uploaded-images/<%=recipe.imageNames[0]%> " alt="">
+                                    </div>
+                                    <h3>
+                                        <%=recipe.name%>
+                                    </h3>
+                                    <span>Added By: <%=recipe.addedBy%></span>
+                                </div>
+                            </a>
+                            <%}) %>
             </div>
         </div>
 

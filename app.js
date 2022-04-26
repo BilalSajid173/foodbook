@@ -422,18 +422,23 @@ app.get("/favourite-recipes", (req, res) => {
     if (req.isAuthenticated()) {
         const favrecipes = []
         let counter = 0
-        req.user.favRecipesId.forEach(id => {
-            Recipe.findById(id, (err, foundRecipe) => {
-                counter++
-                if (foundRecipe) {
-                    favrecipes.push(foundRecipe)
-                }
 
-                if (counter === req.user.favRecipesId.length) {
-                    res.render('favourites', ({ recipes: favrecipes }))
-                }
+        if (req.user.favRecipesId.length === 0) {
+            res.render('favourites', ({ recipes: favrecipes }))
+        } else {
+            req.user.favRecipesId.forEach(id => {
+                Recipe.findById(id, (err, foundRecipe) => {
+                    counter++
+                    if (foundRecipe) {
+                        favrecipes.push(foundRecipe)
+                    }
+
+                    if (counter === req.user.favRecipesId.length) {
+                        res.render('favourites', ({ recipes: favrecipes }))
+                    }
+                })
             })
-        })
+        }
     } else {
         res.redirect("/login")
     }
