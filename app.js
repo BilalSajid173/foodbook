@@ -25,7 +25,7 @@ const fileFilter = (req, file, callback) => {
     if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
         return callback(new Error('Only images are allowed'))
     }
-    callback(null,true)
+    callback(null, true)
 }
 
 const upload = multer({ storage: fileStorage, fileFilter: fileFilter, limits: { fileSize: 1024 * 1024 } })
@@ -463,7 +463,12 @@ app.get("/about", (req, res) => {
     res.render("about")
 })
 
-app.listen(3000, (err) => {
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3000;
+}
+
+app.listen(port, (err) => {
     if (!err) {
         console.log("Server running on port 3000")
     }
