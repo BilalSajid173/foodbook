@@ -44,7 +44,9 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-mongoose.connect("mongodb://localhost:27017/recipesDB")
+const dburl = process.env.DB_URL
+mongoose.connect(dburl);
+//mongoose.connect("mongodb://localhost:27017/recipesDB")
 
 const recipeSchema = new mongoose.Schema({
     name: String,
