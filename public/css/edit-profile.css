@@ -32,8 +32,8 @@
   /* border: 1px solid black !important; */
 }
 
-.edit-profile-form form{
-    text-align: left;
+.edit-profile-form form {
+  text-align: left;
 }
 
 .email,
@@ -55,6 +55,42 @@
   width: 100%;
 }
 
-.edit-profile-form label{
-    font-size: 1.5rem;
+.edit-profile-form label {
+  font-size: 1.5rem;
+}
+
+/************************************Media Queries*************************************/
+
+@media (max-width: 1200px) {
+  .edit-profile-form {
+    width: 80%;
+    padding: 10%;
+  }
+}
+
+@media (max-width: 700px) {
+  .edit-profile-form {
+    width: 90%;
+    padding: 10% 5%;
+  }
+}
+
+@media (max-width: 500px) {
+  .edit-profile-form {
+    width: 100%;
+    padding: 15% 2%;
+    font-size: 0.8rem !important;
+  }
+
+  .wrapper-edit-profile {
+    padding: 0;
+  }
+
+  .edit-profile-form label {
+    font-size: 1rem;
+  }
+
+  .edit-profile-form button {
+    font-size: 1rem;
+  }
 }

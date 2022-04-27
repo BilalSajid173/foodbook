@@ -14,6 +14,8 @@
 
 .edit-recipe h2 {
   text-align: center;
+  font-size: 2.3rem;
+  margin-bottom: 2rem;
 }
 
 .edit-recipe input[type="text"] {
@@ -26,6 +28,7 @@
   margin: 1.5rem 0;
   border-radius: 10px;
   padding: 0.5rem 1rem;
+  transition: all 0.3s ease-in;
 }
 
 .edit-recipe textarea {
@@ -39,6 +42,7 @@
   border-radius: 10px;
   border: 0;
   padding: 1rem;
+  transition: all 0.3s ease-in;
 }
 
 .edit-recipe input[type="file"] {
@@ -67,4 +71,71 @@
 .edit-recipe h4 {
   text-align: left;
   margin-top: 2rem;
+}
+
+.edit-recipe input[type="text"]:focus,
+.edit-recipe textarea:focus {
+  box-shadow: 2px 2px 2px #fd5d5d;
+}
+
+/*********************************Media Queries*******************************/
+
+@media (max-width: 1400px) {
+  .edit-recipe {
+    padding: 10% 20%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .edit-recipe {
+    padding: 10% 15%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .edit-recipe {
+    padding: 10%;
+  }
+}
+
+@media (max-width: 500px) {
+  .edit-recipe {
+    padding: 12% 5%;
+  }
+
+  .edit-recipe button {
+    width: 60%;
+    margin-top: 2rem;
+  }
+}
+
+
+@media (max-width: 350px) {
+  .edit-recipe h2{
+    font-size: 1.8rem;
+  }
+
+  .edit-recipe label {
+    font-size: 1.2rem;
+  }
+
+  .edit-recipe h4{
+    font-size: 0.9rem;
+  }
+
+  .edit-recipe input[type="text"]{
+    font-size: 1.1rem;
+  }
+
+  .edit-recipe textarea{
+    font-size: 0.8rem;
+  }
+
+  .edit-recipe button{
+    font-size: 1rem;
+  }
+
+  .edit-recipe input[type="file"]{
+    font-size: 0.7rem;
+  }
 }
