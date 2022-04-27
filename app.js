@@ -1,4 +1,5 @@
 
+const path = require('path');
 require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -19,7 +20,15 @@ const fileStorage = multer.diskStorage({
     }
 })
 
-const upload = multer({ storage: fileStorage })
+const fileFilter = (req, file, callback) => {
+    var ext = path.extname(file.originalname);
+    if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+        return callback(new Error('Only images are allowed'))
+    }
+    callback(null,true)
+}
+
+const upload = multer({ storage: fileStorage, fileFilter: fileFilter, limits: { fileSize: 1024 * 1024 } })
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -92,7 +101,7 @@ app.get("/", (req, res) => {
                 return b.favouritedBy.length - a.favouritedBy.length
             })
 
-            const topRated = recipes.slice(0,6)
+            const topRated = recipes.slice(0, 6)
             res.render("home", ({ topRated: topRated, latest: latest }))
 
         } else {
@@ -145,7 +154,7 @@ app.get("/all-recipes/:classification", (req, res) => {
                 return b.favouritedBy.length - a.favouritedBy.length
             })
 
-            const topRated = recipes.slice(0,12)
+            const topRated = recipes.slice(0, 12)
             res.render("allrecipes", ({ category: category, recipes: topRated }))
         })
     } else {

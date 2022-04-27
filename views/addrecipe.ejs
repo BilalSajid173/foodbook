@@ -1,10 +1,10 @@
 <%- include("partials/header.ejs") %>
 
     <link rel="stylesheet" href="/css/add-recipe.css">
-    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/user-nav.css">
     <link rel="stylesheet" href="/css/footer.css">
 
-    <%- include("partials/navbar.ejs") %>
+    <%- include("partials/user-nav.ejs") %>
 
         <div class="add-recipe container-fluid">
 
@@ -12,7 +12,8 @@
             <form action="/add-recipe" method="POST" enctype="multipart/form-data">
 
                 <input type="text" name="title" id="title" placeholder="Name Of The Recipe" required>
-                <textarea name="ingredients" id="ingredients" rows="5" placeholder="Ingredients Required" required></textarea>
+                <textarea name="ingredients" id="ingredients" rows="5" placeholder="Ingredients Required"
+                    required></textarea>
                 <textarea name="description" id="description" rows="15" placeholder="How To Make" required></textarea>
 
                 <label for="#recipe-img">Upload Recipe Images(Max 5, recommended dimensions less than 600*600)</label>
