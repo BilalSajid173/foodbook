@@ -44,12 +44,12 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-// const dburl = process.env.DB_URL
-// mongoose.connect(dburl, {
-//     usenewurlparser: true,
-//     useunifiedtopology: true,
-// });
-mongoose.connect("mongodb://localhost:27017/recipesDB")
+const dburl = process.env.DB_URL
+mongoose.connect(dburl, {
+    usenewurlparser: true,
+    useunifiedtopology: true,
+});
+// mongoose.connect("mongodb://localhost:27017/recipesDB")
 
 const recipeSchema = new mongoose.Schema({
     name: String,
