@@ -468,6 +468,10 @@ app.get("/about", (req, res) => {
     res.render("about")
 })
 
+app.get("/contact", (req, res) => {
+    res.render("contact")
+})
+
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 3000;

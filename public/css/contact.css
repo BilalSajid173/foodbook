@@ -1,0 +1,127 @@
+.contact-form {
+  min-height: 90vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("/images/add-recipe-bg-img.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 5% 30%;
+  font-family: "Varela Round", sans-serif;
+}
+
+.wrapper-contact h3 {
+  text-align: center;
+  color: rgb(93, 48, 48);
+}
+
+.wrapper-contact {
+  position: relative;
+  top: -100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: rgb(229, 107, 107);
+  padding: 4% 0;
+  animation-name: ctc-form-anm;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.wrapper-contact form {
+  width: 80%;
+}
+
+@keyframes ctc-form-anm {
+  100% {
+    top: 0px;
+  }
+}
+
+.wrapper-contact input[type="text"],
+.wrapper-contact textarea {
+  background-color: rgb(229, 107, 107);
+  width: 100%;
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid rgb(224, 31, 31);
+  resize: none;
+  font-size: 1.3rem;
+  padding: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: rgb(80, 24, 24);
+  transition: all 0.3s ease-in-out;
+}
+
+.wrapper-contact input[type="text"]:focus,
+.wrapper-contact textarea:focus {
+  box-shadow: -2px -2px 1px rgb(215, 84, 84), 2px 0 1px rgb(215, 84, 84);
+}
+
+.yourname,
+.youremail,
+.yourmessage {
+  margin: 2rem 0;
+}
+
+.submit-contact-btn {
+  color: rgb(93, 48, 48);
+  margin-left: 50%;
+  transform: translateX(-50%);
+  outline: 0;
+  font-size: 1.5rem;
+  width: 50%;
+  background-color: inherit;
+  border: 1px solid rgb(93, 48, 48);
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit-contact-btn:hover {
+  background-color: rgb(93, 48, 48);
+  color: white;
+}
+
+/******************************************Media Queries********************************/
+
+@media (max-width: 1200px) {
+  .contact-form {
+    padding: 10% 20%;
+  }
+}
+
+@media (max-width: 700px) {
+  .contact-form {
+    padding: 15% 10%;
+  }
+}
+
+@media (max-width: 500px) {
+  .contact-form {
+    padding: 20% 5%;
+  }
+
+  .submit-contact-btn {
+    width: 80%;
+  }
+}
+
+@media (max-width: 400px) {
+  .contact-form {
+    padding: 30% 4%;
+    min-height: 80vh;
+  }
+
+  .wrapper-contact form {
+    width: 95%;
+  }
+
+  .wrapper-contact input[type="text"],
+  .wrapper-contact textarea {
+    font-size: 1rem;
+  }
+}

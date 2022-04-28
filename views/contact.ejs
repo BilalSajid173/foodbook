@@ -1,0 +1,30 @@
+<%- include("partials/header.ejs") %>
+
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <%- include("partials/navbar.ejs") %>
+
+        <div class="contact-form">
+            <div class="wrapper-contact">
+                <form action="https://formsubmit.co/2d1ede43f086a383ce7dee95ac369cd8" method="post">
+                    <input type="hidden" name="_next" value="https://fierce-waters-21031.herokuapp.com/">
+                    <h3>Contact Us!!</h3>
+                    <input type="hidden" name="_captcha" value="false">
+                    <div class="yourname">
+                        <input type="text" name="name" id="" placeholder="Name*" required>
+                    </div>
+                    <div class="youremail">
+                        <input type="text" name="email" placeholder="Email*" required>
+                    </div>
+                    <div class="yourmessage">
+                        <textarea type="text" name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" name="submit-btn" class="submit-contact-btn">Send Email</button>
+                </form>
+            </div>
+        </div>
+
+
+        <%- include("partials/footer.ejs") %>
