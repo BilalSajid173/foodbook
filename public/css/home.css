@@ -253,10 +253,10 @@
     margin-right: 0;
   }
 
-  .view-all-recipes{
+  .view-all-recipes {
     padding: 10%;
   }
-  
+
   .view-all-recipes button {
     width: 80%;
   }
@@ -276,6 +276,10 @@
   .latest-recipes a {
     width: 90%;
   }
+
+  .get-started-div {
+    width: 70%;
+  }
 }
 
 @media (max-width: 400px) {
@@ -286,12 +290,8 @@
 }
 
 @media only screen and (max-width: 350px) {
-  .get-started-div {
-    width: 70%;
-  }
-
   .top-div h1 {
-    font-size: 2rem;
+    font-size: 1.9rem;
   }
 
   .top-div p {

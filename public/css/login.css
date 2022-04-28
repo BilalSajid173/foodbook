@@ -54,7 +54,7 @@
 }
 .register-now a {
   text-decoration: none;
-  margin-left: 50%;
+  /* margin-left: 50%; */
 }
 
 .login-form hr {
