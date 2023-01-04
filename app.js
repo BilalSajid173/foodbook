@@ -5,10 +5,13 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const multer = require("multer");
 const mongoose = require("mongoose");
+const app = express();
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const { cloudinary } = require("./utils/cloudinary");
+const http = require("http");
+const server = http.createServer(app);
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -33,7 +36,6 @@ const upload = multer({
   limits: { fileSize: 1024 * 1024 },
 });
 
-const app = express();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -507,11 +509,19 @@ if (port == null || port == "") {
   port = 3000;
 }
 
-app.listen(port, (err) => {
-  if (!err) {
-    console.log("Server running on port 3000");
-  }
-});
+mongoose
+  .connect(dburl)
+  .then((result) => {
+    server.listen(port);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+// app.listen(port, (err) => {
+//   if (!err) {
+//     console.log("Server running on port 3000");
+//   }
+// });
 
 /*font-family: 'Merriweather Sans', sans-serif;
 font-family: 'Montserrat', sans-serif;
